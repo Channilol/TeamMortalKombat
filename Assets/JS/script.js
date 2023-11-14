@@ -5,6 +5,43 @@ const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
 const paginaFeedback = document.querySelector('#paginaFeedback')
 
+/*********************** VEDERE ALLA FINE ******************/
+// gestione logica del timer
+
+const countdownElement = document.getElementById('countdown');
+let timeLeft = 4; // Durata del timer in secondi
+let timerInterval;
+
+function startTimer() {
+    updateTimer();
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimer();
+
+        if (timeLeft === 0) { // se il timeLeft è arrivato a 0 fai qualcosa
+            clearInterval(timerInterval);
+
+            console.log('Tempo finito!');
+
+            vaiAllaProssimaDomanda()
+
+        }
+    }, 1000);
+}
+
+function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    countdownElement.textContent = `${minutes}:${seconds}`;
+}
+
+
+/*************************** VEDERE ALLA FINE ******************/
+
+
 
 // stato iniziale
 
@@ -15,6 +52,8 @@ paginaFeedback.style.display = 'none'
 // gestione pagina corrente
 
 let paginaCorrente = 0
+
+
 
 const displayPaginaCorrente = () => {
     const pagine = [
@@ -42,6 +81,10 @@ const vaiAllaPaginaSuccessiva = (idBottone) => {
         e.preventDefault();
 
         paginaCorrente++
+
+        if (paginaCorrente === 1) {
+            startTimer()
+        }
 
         if (paginaCorrente >= 4) {
             paginaCorrente = 0
@@ -78,6 +121,7 @@ let indiceDomandaCorrente = 0
 
 
 const mostraDomande = () => {
+
     const domandaCorrente = quiz[indiceDomandaCorrente]
 
     const h1 = document.querySelector("#paginaDomande > h1")
@@ -95,9 +139,20 @@ const mostraDomande = () => {
         button.addEventListener('click', () => handlerRisposta(opzione))
         opzioni.appendChild(button)
     })
+
 }
 
 mostraDomande()
+
+const vaiAllaProssimaDomanda = () => {
+    clearInterval(timerInterval)
+    timeLeft = 4
+    if (indiceDomandaCorrente < quiz.length) {
+        indiceDomandaCorrente++
+        mostraDomande()
+    }
+    startTimer()
+}
 
 const handlerRisposta = (opzioneSelezionata) => {
     const domandaCorrente = quiz[indiceDomandaCorrente]
@@ -114,7 +169,7 @@ const handlerRisposta = (opzioneSelezionata) => {
 
     // controllare se le domande sono finite
     if (indiceDomandaCorrente < quiz.length) {
-        mostraDomande()
+        vaiAllaProssimaDomanda()
     } else {
 
         const percentualeRisposteCorrette = ((punteggioTotale * 100) / quiz.length).toFixed(1)
@@ -145,6 +200,9 @@ const handlerRisposta = (opzioneSelezionata) => {
 
     }
 }
+
+
+
 
 vaiAllaPaginaSuccessiva('#bottonerateus')
 
