@@ -3,337 +3,340 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 html {
-    height: 100%;
-    font-family: 'Inter', sans-serif;
-    color: #dcd2e1;
-    font-weight: 300;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  color: #dcd2e1;
+  font-weight: 300;
 }
 
 body {
-    background-image: url(../IMG/bg.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-image: url(../IMG/bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Outfit', sans-serif;
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Outfit', sans-serif;
 }
 
 span {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /* HEADER */
 
 header {
-    padding: 3vh 0 6vh 5vw;
+  padding: 3vh 0 6vh 5vw;
 }
 
 header img {
-    width: 10vw;
+  width: 10vw;
 }
 
 /* PAGINA 1 - LORENZO */
 
-#paginaWelcome{
-    margin: 0 7vw 0 7vw;
+#paginaWelcome {
+  margin: 0 7vw 0 7vw;
 }
 
 #paginaWelcome h1 {
-    margin: 0;
-    font-size: 4em;
-    justify-items: start;
-    width: 35%;
-    line-height: 0.8em;
-    font-weight: 500;
+  margin: 0;
+  font-size: 4em;
+  justify-items: start;
+  width: 35%;
+  line-height: 0.8em;
+  font-weight: 500;
 }
 
 #paginaWelcome h2 {
-    color: #c2128d;
-    margin: 8vh 0 4vh 0;
-    font-size: 2em;
+  color: #c2128d;
+  margin: 8vh 0 4vh 0;
+  font-size: 2em;
 }
 
 #paginaWelcome p {
-    margin: 1vh 0 4vh 0;
-    width: 50%;
+  margin: 1vh 0 4vh 0;
+  width: 50%;
 }
 
 #paginaWelcome ul {
-    margin: 3vh 0 28vh 0;
+  margin: 3vh 0 28vh 0;
 }
 
 #paginaWelcome li {
-    margin: 1vh 0 0 0;
-    font-size: 0.8em;
+  margin: 1vh 0 0 0;
+  font-size: 0.8em;
 }
 
 #paginaWelcome form input[type='checkbox'] {
-    vertical-align: middle;
-    height: 25px;
-    width: 25px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    border: 3px solid white;
-    border-radius: 3px;
-    outline: none;
-    transition-duration: 0.3s;
-    background-color: transparent;
-    cursor: pointer;
+  vertical-align: middle;
+  height: 25px;
+  width: 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 3px solid white;
+  border-radius: 3px;
+  outline: none;
+  transition-duration: 0.3s;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 #paginaWelcome form input[type='checkbox']:checked {
-    border: 1px solid black;
-    background-color: white;
-  }
+  border: 1px solid black;
+  background-color: white;
+}
 
 #paginaWelcome button {
-    padding: 2vh 5vw 2vh 5vw;
-    background-color: #00ffff;
-    border: 0;
-    font-size: 1.3em;
-    font-weight: 700;
-    text-shadow: 0px 1px 1px #0a9191;
-    margin: 0;
+  padding: 2vh 5vw 2vh 5vw;
+  background-color: #00ffff;
+  border: 0;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-shadow: 0px 1px 1px #0a9191;
+  margin: 0;
 }
 
 #paginaWelcome button:hover {
-    box-shadow: 0px 0px 25px #00ffff;
+  box-shadow: 0px 0px 25px #00ffff;
 }
 
 #checkBoxDiv {
-    width: 49.5%;
-    display: inline-block;
+  width: 49.5%;
+  display: inline-block;
 }
 
 #divBottoneProceed {
-    text-align: right;
-    display: inline-block;
-    width: 49.5%;
+  text-align: right;
+  display: inline-block;
+  width: 49.5%;
 }
 
 #paginaWelcome form {
-    margin: 0;
+  margin: 0;
 }
 
 /* PAGINA 2 - OMAR */
 
 #paginaDomande {
-    margin: 0 10vw 0 10vw;
+  margin: 0 10vw 0 10vw;
 }
 
 #timer {
-    text-align: center;
-    background-color:#850b60;
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    top: 7%;
-    right: 10%;
-    box-shadow: 0px 0px 15px #0f0f0f;
-    border-radius: 55%;
+  text-align: center;
+  background-color: #850b60;
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  top: 7%;
+  right: 10%;
+  box-shadow: 0px 0px 15px #0f0f0f;
+  border-radius: 55%;
 }
 
 #timer p {
-    margin: 0;
+  margin: 0;
 }
 
 #timerP {
-    padding-top: 33px;
+  padding-top: 33px;
 }
 
 #paginaDomande h1 {
-    text-align: center;
-    font-size: 3em;
-    margin: 0 20vw 15vh 20vw;
-    font-weight: 500;
+  text-align: center;
+  font-size: 3em;
+  margin: 0 20vw 15vh 20vw;
+  font-weight: 500;
 }
 
 #paginaDomande button {
-    width: 25vw;
-    margin: 1.5vh 2vw;
-    padding: 2.5vh 0;
-    background-color: rgba(255, 255, 255, 0.13);
-    color: #dcd2e1;
-    border: 3px solid #ffffff;
-    border-radius: 35px;
-    font-size: 1.3em;
-    font-weight: 500;
+  width: 25vw;
+  margin: 1.5vh 2vw;
+  padding: 2.5vh 0;
+  background-color: rgba(255, 255, 255, 0.13);
+  color: #dcd2e1;
+  border: 3px solid #ffffff;
+  border-radius: 35px;
+  font-size: 1.3em;
+  font-weight: 500;
 }
 
 #paginaDomande button:hover {
-    background: linear-gradient(#c2128d, #850b60);
-    border: 3px solid #df4ab2;
-    cursor: pointer;
+  background: linear-gradient(#c2128d, #850b60);
+  border: 3px solid #df4ab2;
+  cursor: pointer;
 }
 
 #paginaDomande button:active {
-    border: 3px solid #860560;
+  border: 3px solid #860560;
 }
 
 #divContenitoreBottoniDomande {
-    text-align: center;
+  text-align: center;
 }
 
 #paginaDomandeDivP {
-    margin: 20vh 0 0 0;
-    text-align: center;
-    font-weight: 500;
-    font-size: 1.2em;
-    font-family: 'Outfit', sans-serif;
-    letter-spacing: 3px;
+  margin: 20vh 0 0 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.2em;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 3px;
 }
 
 #paginaDomandeDivP span {
-    color: #c2128d;
+  color: #c2128d;
 }
 
 /* PAGINA 3 - MARCO */
 
-#paginaRisultati{
-    margin: 0 7vw 0 7vw;
+#paginaRisultati {
+  margin: 0 7vw 0 7vw;
 }
 
 #paginaRisultati h1 {
-    text-align: center;
-    font-size: 3.5em;
-    margin: 0;
+  text-align: center;
+  font-size: 3.5em;
+  margin: 0;
 }
 
 #summaryP {
-    text-align: center;
-    font-size: 1.5em;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 400;
-    margin: 1vh 0 10vh 0;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  margin: 1vh 0 10vh 0;
 }
 
 #divCorrectWrongGrafico {
-    margin: 0 0 20vh 0;
+  margin: 0 0 20vh 0;
 }
 
 #divCorrectWrongGrafico div {
-    display: inline-block;
+  display: inline-block;
 }
 
 #divCorrect {
-    width: 25%;
+  width: 25%;
 }
 
 #divCorrect h2 {
-    margin: 0;
-    font-size: 3.5em;
-    line-height: 1em;
-    font-weight: 400;
+  margin: 0;
+  font-size: 3.5em;
+  line-height: 1em;
+  font-weight: 400;
 }
 
 #divCorrect p {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.4em;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4em;
 }
 
 #divGraficoResults {
-    width: 49%;
-    text-align: center;
+  width: 49%;
+  text-align: center;
 }
 
 #primoPGrafico {
-    font-weight: 600;
-    font-size: 1.2em;
+  font-weight: 600;
+  font-size: 1.2em;
 }
 
 #primoPGrafico span {
-    color: #00ffff;
+  color: #00ffff;
 }
 
 #secondoPGrafico {
-    font-size: 0.9em;
+  font-size: 0.9em;
 }
 
 #divWrong {
-    width: 25%;
-    text-align: right;
+  width: 25%;
+  text-align: right;
 }
 
 #divWrong h2 {
-    margin: 0;
-    font-size: 3.5em;
-    line-height: 1em;
-    font-weight: 400;
+  margin: 0;
+  font-size: 3.5em;
+  line-height: 1em;
+  font-weight: 400;
 }
 
 #divWrong p {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.4em;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4em;
 }
 
 #divRateUs {
-    text-align: center;
+  text-align: center;
 }
 
 #divRateUs button {
-    padding: 1.5vh 5vw 1.5vh 5vw;
-    background-color: rgba(255, 255, 255, 0);
-    border: 2px solid #dcd2e1;
-    color: #dcd2e1;
-    font-size: 1.2em;
-    font-weight: 600;
-    letter-spacing: 1px;
+  padding: 1.5vh 5vw 1.5vh 5vw;
+  background-color: rgba(255, 255, 255, 0);
+  border: 2px solid #dcd2e1;
+  color: #dcd2e1;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 #divRateUs button:hover {
-    box-shadow: 0px 0px 25px #525cee;
-    cursor: pointer;
+  box-shadow: 0px 0px 25px #525cee;
+  cursor: pointer;
 }
 
 #divRateUs button:active {
-    background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* PAGINA 4 - */
 
 #paginaFeedback {
-    margin: 0 10vw 0 10vw;
-    text-align: center;
+  margin: 0 10vw 0 10vw;
+  text-align: center;
 }
 
 #paginaFeedback h1 {
-    font-size: 3.5em;
+  font-size: 3.5em;
 }
 
 #paginaFeedback p {
-    font-size: 1.6em;
-    font-weight: 400;
+  font-size: 1.6em;
+  font-weight: 400;
 }
 
 #paginaFeedback img {
-    margin: 2vh 0 8vh 0;
+  margin: 2vh 0 8vh 0;
 }
 
 #paginaFeedback input {
-    background-color: rgba(255, 255, 255, 0);
-    border: none;
-    border-bottom: 2px solid #c2128d;
-    width: 75%;
-    margin: 0 0 12.5vh 0;
-    color: #dcd2e1;
-    font-size: 1.2em;
-    padding: 1vh 2vw 1vh 2vw;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-bottom: 2px solid #c2128d;
+  width: 75%;
+  margin: 0 0 12.5vh 0;
+  color: #dcd2e1;
+  font-size: 1.2em;
+  padding: 1vh 2vw 1vh 2vw;
 }
 
 #paginaFeedback button {
-    padding: 2vh 4vw 2vh 4vw;
-    background-color: #00ffff;
-    border: 0;
-    font-size: 1.3em;
-    font-weight: 700;
-    text-shadow: 0px 1px 1px #0a9191;
+  padding: 2vh 4vw 2vh 4vw;
+  background-color: #00ffff;
+  border: 0;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-shadow: 0px 1px 1px #0a9191;
 }
 
 #paginaFeedback button:hover {
-    box-shadow: 0px 0px 25px #00ffff;
-    cursor: pointer;
+  box-shadow: 0px 0px 25px #00ffff;
+  cursor: pointer;
 }
