@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Assets/CSS/style.css">
     <title>TeamMortalKombat</title>
   </head>
   <body>
@@ -10,10 +11,9 @@
       <img src="Assets/IMG/epicode_logo.png" alt="EpicodeLogo" />
     </header>
     <main>
-      <div id="paginaWelcome">
-        <!-- Lorenzo -->
+       <div id="paginaWelcome">
         <div>
-          <h1>Welcome to <span>your exam</span></h1>
+          <h1>Welcome to <br><span>your exam</span></h1>
         </div>
         <div>
           <h2>Instructions</h2>
@@ -34,71 +34,69 @@
           </ul>
         </div>
         <form action="">
-          <input
-            type="checkbox"
-            id="checkboxobbligatoria"
-            name="checkboxobbligatoria"
-            required
-          />
-          <label for="checkboxobbligatoria"
-            >I promise to answer myself without help from anyone</label
-          >
-          <button type="submit" id="bottoneproceed" name="bottoneproceed">
-            PROCEED
-          </button>
+          <div id="checkBoxDiv">
+            <input
+              type="checkbox"
+              id="checkBoxObbligatoria"
+              name="checkBoxObbligatoria"
+              required
+            />
+            <label for="checkboxobbligatoria">
+              <span>I promise to answer myself without help from anyone</span>
+            </label>
+          </div>
+          <div id="divBottoneProceed">
+            <button type="submit" id="bottoneProceed" name="bottoneProceed">
+              PROCEED
+            </button>
+          </div>
         </form>
-      </div>
+      </div> 
       <div id="paginaDomande">
-        <!-- Omar -->
-        <div id="timer"><p>Timer</p></div>
-        <h1>How can I create a checkbox in HTML?</h1>
-        <div>
-          <div>
-            <button><code>&lt;input type = "check"&gt;</code></button>
-            <button><code>&lt;input type = "checkbox"&gt;</code></button>
-          </div>
-          <div>
-            <button><code>&lt;checkbox&gt;</code></button>
-            <button><code>&lt;input type = "button"&gt;</code></button>
-          </div>
+        <div id="timer">
+          <p id="timerP">SECONDS</p>
+          <p>16</p>
+          <p>REMAINING</p>
         </div>
-        <div><p>Question 1/10</p></div>
+        <h1>How can I create a <span>checkbox in HTML?</span></h1>
+        <div id="divContenitoreBottoniDomande">
+            <button>1check</button>
+            <button>2checkbox</button>
+            <button>3checkbox</button>
+            <button>4button</code></button>
+        </div>
+        <div id="paginaDomandeDivP">
+          <p>QUESTION 1<span>/10</span></p>
+        </div>
       </div>
       <div id="paginaRisultati">
-        <!-- Marco -->
         <h1>Results</h1>
-        <p>The summary of your answer:</p>
-
-        <div>
-          <div>
-            <h2>Correct <span>66.7%</span></h2>
+        <p id="summaryP">The summary of your answer:</p>
+        <div id="divCorrectWrongGrafico">
+          <div id="divCorrect">
+            <h2>Correct <br><span>66.7%</span></h2>
             <p>4/6 questions</p>
           </div>
-
-          <div>
-            <p>Congratulations! <span>You passed the exam.</span></p>
-            <p>
-              We'll sen you the certificate <br />in few minutes. <br />
+          <div id="divGraficoResults">
+            <p id="primoPGrafico">Congratulations! <br><span>You passed the exam.</span></p>
+            <p id="secondoPGrafico">
+              We'll send you the certificate <br />in few minutes. <br />
               Check your email (including <br />promotions / spam folder)
             </p>
           </div>
-
-          <div>
-            <h2>Wrong <span>33.3%</span></h2>
+          <div id="divWrong">
+            <h2>Wrong <br><span>33.3%</span></h2>
             <p>2/6 questions</p>
           </div>
-
-          <div>
-            <button>RATE US</button>
-          </div>
+        </div>
+        <div id="divRateUs">
+          <button id="bottoneRateUs">RATE US</button>
         </div>
       </div>
-
       <div id="paginaFeedback">
-        <!-- Daniel -->
-        <h1>Tell us how it`s going</h1>
+        <h1>Tell us how it's going</h1>
         <p>
-          From 0 to 10, how likely are you to recommend EPICODE to a friend or a
+          From 0 to 10, how likely are you to recommend EPICODE<br>to a friend or a
           colleague?
         </p>
         <div>
@@ -116,9 +114,12 @@
         <p>Leave us an open feedback about your experience so far</p>
         <form action="">
           <input type="text" placeholder="Write your comment here" />
+          <div>
+            <button id="bottoneMoreInfo" type="submit">MORE INFO</button>
+          </div>
         </form>
-        <button type="submit">MORE INFO</button>
       </div>
     </main>
   </body>
+  <script src="Assets/JS/script.js"></script>
 </html>
