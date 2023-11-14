@@ -1,0 +1,1 @@
+const paginaWelcome = document.selector
