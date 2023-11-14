@@ -58,7 +58,7 @@
           <p>16</p>
           <p>REMAINING</p>
         </div>
-        <h1>How can I create a <span>checkbox in HTML?</span></h1>
+        <h1></h1>
         <div id="divContenitoreBottoniDomande">
           <button>1check</button>
           <button>2checkbox</button>
@@ -78,6 +78,84 @@
             <p>4/6 questions</p>
           </div>
           <div id="divGraficoResults">
+            <svg
+              width="70%"
+              height="70%"
+              viewBox="0 0 160 160"
+              class="donut"
+              fill="none"
+            >
+              <circle
+                class="donut-hole"
+                cx="80"
+                cy="80"
+                r="63.66"
+                fill="#transparent"
+              ></circle>
+              <circle
+                class="donut-ring"
+                cx="80"
+                cy="80"
+                r="63.66"
+                fill="transparent"
+                stroke-width="20"
+              ></circle>
+              <circle
+                class="donut-segment"
+                cx="80"
+                cy="80"
+                r="63.66"
+                fill="transparent"
+                stroke-width="20"
+                stroke-dasharray="200 200"
+                stroke-dashoffset="100"
+              ></circle>
+              <!-- Increase the radius r -->
+              <g class="donut-text">
+                <text y="30%" transform="translate(0, 4)">
+                  <tspan
+                    x="50%"
+                    text-anchor="middle"
+                    class="donut-percent"
+                    font-size="6px"
+                  >
+                    Congratulations!
+                  </tspan>
+                </text>
+                <!-- Adding a paragraph -->
+                <text
+                  y="36%"
+                  transform="translate(0, 4)"
+                  font-size="8px"
+                  font-weight="bold"
+                >
+                  <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                    You passed the exam.
+                  </tspan>
+                </text>
+                <text y="48%" transform="translate(0, 4)" font-size="5px">
+                  <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                    We'll send you the certificate
+                  </tspan>
+                </text>
+                <text y="52%" transform="translate(0, 4)" font-size="5px">
+                  <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                    in few minutes.
+                  </tspan>
+                </text>
+                <text y="56%" transform="translate(0, 4)" font-size="5px">
+                  <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                    Check your email (including
+                  </tspan>
+                </text>
+                <text y="60%" transform="translate(0, 4)" font-size="5px">
+                  <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                    promotions / spam folder)
+                  </tspan>
+                </text>
+              </g>
+            </svg>
+            <!-- 
             <p id="primoPGrafico">
               Congratulations! <br /><span>You passed the exam.</span>
             </p>
@@ -85,6 +163,7 @@
               We'll send you the certificate <br />in few minutes. <br />
               Check your email (including <br />promotions / spam folder)
             </p>
+            -->
           </div>
           <div id="divWrong">
             <h2>Wrong <br /><span>33.3%</span></h2>
@@ -115,7 +194,7 @@
         </div>
         <p>Leave us an open feedback about your experience so far</p>
         <form action="">
-          <input type="text" placeholder="Write your comment here" />
+          <input type="text" placeholder="Write your comment here" required />
           <div>
             <button id="bottoneMoreInfo" type="submit">MORE INFO</button>
           </div>
@@ -124,5 +203,5 @@
     </main>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="Assets/JS/script.js"></script>
+  <script src="Assets/JS/script_2.js"></script>
 </html>

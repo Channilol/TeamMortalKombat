@@ -215,7 +215,8 @@ header img {
 }
 
 #divCorrectWrongGrafico {
-  margin: 0 0 20vh 0;
+  margin: 0 0 2vh 0;
+  vertical-align: middle;
 }
 
 #divCorrectWrongGrafico div {
@@ -241,7 +242,55 @@ header img {
 #divGraficoResults {
   width: 49%;
   text-align: center;
+  vertical-align: middle;
 }
+
+/* GRAFICO CIAMBELLA */
+
+.svg-item {
+  width: 400px;
+  height: 400px;
+  font-size: 16px;
+}
+.donut-ring {
+  stroke: #00ffff;
+}
+
+.donut-segment {
+  animation: donut-chart-fill 1s reverse ease-in;
+  transform-origin: center;
+  stroke: #c2128d;
+}
+
+.donut-text {
+  font-family: Arial, Helvetica, sans-serif;
+  fill: #00ffff;
+}
+
+.donut-label {
+  font-size: 0.28em;
+  font-weight: 700;
+  line-height: 1;
+  fill: #000;
+  transform: translateY(0.25em);
+}
+
+.donut-percent {
+  font-size: 0.5em;
+  fill: white;
+  line-height: 1;
+  transform: translateY(0.5em);
+}
+
+.donut-paragraph {
+  fill: white;
+}
+
+#divGraficoResults > svg > g > text:nth-child(2) > tspan {
+  fill: #00ffff;
+}
+
+/* FINE GRAFICO CIAMBELLA */
 
 #primoPGrafico {
   font-weight: 600;

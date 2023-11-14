@@ -1,39 +1,3 @@
-
-// gestione logica del timer
-/*
-const countdownElement = document.getElementById('timerP');
-let timeLeft = 4; // Durata del timer in secondi
-let timerInterval;
-
-function startTimer() {
-    updateTimer();
-
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimer();
-
-        if (timeLeft === 0) { // se il timeLeft è arrivato a 0 fai qualcosa
-            clearInterval(timerInterval);
-
-            console.log('Tempo finito!');
-
-            vaiAllaProssimaDomanda()
-
-        }
-    }, 1000);
-}
-
-function updateTimer() {
-    const minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
-    seconds = seconds < 10 ? `0${seconds}` : seconds;
-
-    countdownElement.textContent = `${minutes}:${seconds}`;
-}
-
-*/
-
-
 // selezionato i 4 div
 
 const paginaWelcome = document.querySelector('#paginaWelcome')
@@ -43,9 +7,17 @@ const paginaFeedback = document.querySelector('#paginaFeedback')
 
 // stato iniziale
 
+
 paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'none'
 paginaFeedback.style.display = 'none'
+
+// stato iniziale per donut chart/*  */
+
+/* paginaWelcome.style.display = 'none'
+paginaDomande.style.display = 'none'
+paginaRisultati.style.display = 'block'
+paginaFeedback.style.display = 'none' */
 
 // gestione pagina corrente
 
@@ -72,17 +44,28 @@ const displayPaginaCorrente = () => {
 
 const vaiAllaPaginaSuccessiva = (idBottone) => {
     const button = document.querySelector(idBottone);
+    const checkbox = document.getElementById('checkBoxObbligatoria')
 
     button.addEventListener('click', (e) => {
         e.preventDefault();
 
-        paginaCorrente++
+        if (checkbox.checked) {
+            paginaCorrente++
 
-        if (paginaCorrente >= 4) {
-            paginaCorrente = 0
+            if (paginaCorrente >= 4) {
+                paginaCorrente = 0
+            }
+
+            displayPaginaCorrente()
         }
 
-        displayPaginaCorrente()
+        else {
+            alert('Devi confermare prima')
+        }
+
+
+
+
     })
 }
 
@@ -114,24 +97,61 @@ let indiceDomandaCorrente = 0
 
 const mostraDomande = () => {
 
-    const domandaCorrente = quiz[indiceDomandaCorrente]
 
-    const h1 = document.querySelector("#paginaDomande > h1")
+    if (quiz.length > 0 && indiceDomandaCorrente < quiz.length) {
 
-    h1.textContent = domandaCorrente.domanda
+        const domandaCorrente = quiz[indiceDomandaCorrente]
 
-    const opzioni = document.querySelector("#opzioni") // div contenitore
+        const h1 = document.querySelector("#paginaDomande > h1")
 
-    opzioni.innerHTML = ''
+        h1.textContent = domandaCorrente.domanda
+
+        const opzioni = document.querySelector("#divContenitoreBottoniDomande") // div contenitore
+
+        opzioni.innerHTML = ''
 
 
-    domandaCorrente.opzioni.forEach((opzione) => {
-        const button = document.createElement('button')
-        button.textContent = opzione
+        domandaCorrente.opzioni.forEach((opzione) => {
+            const button = document.createElement('button')
+            button.textContent = opzione
 
-        button.addEventListener('click', () => handlerRisposta(opzione));
-        opzioni.appendChild(button)
-    })
+            button.addEventListener('click', () => handlerRisposta(opzione));
+            opzioni.appendChild(button)
+        })
+    } else {
+
+        // vai alla pagina dei risultati dopo aver finito il quiz
+        console.log('Domande finite')
+        paginaDomande.style.display = 'none';
+        paginaRisultati.style.display = 'block';
+
+        const percentualeRisposteCorrette = ((punteggioTotale * 100) / quiz.length).toFixed(1)
+        const percentualeRisposteErrate = 100 - percentualeRisposteCorrette
+
+        console.log('Quiz completato')
+        console.log('Punteggio totale: ', punteggioTotale)
+        console.log('Risposte corrette: ', punteggioTotale + '/' + quiz.length)
+        console.log('Percentuale risposte corrette: ', percentualeRisposteCorrette + '%')
+        console.log('Percentuale risposte errate: ', percentualeRisposteErrate + '%')
+
+        // inserimento dati paginaRisultati
+
+        const spanCorrette = document.querySelector('#divCorrect span')
+        spanCorrette.textContent = percentualeRisposteCorrette + '%'
+
+        const pCorrette = document.querySelector('#divCorrect p')
+        pCorrette.textContent = punteggioTotale + '/' + quiz.length + ' questions'
+
+        const spanErrate = document.querySelector('#divWrong span')
+        spanErrate.textContent = percentualeRisposteErrate + '%'
+
+        const pErrate = document.querySelector('#divWrong p')
+        pErrate.textContent = quiz.length - punteggioTotale + '/' + quiz.length + ' questions'
+
+        updateDashArray(percentualeRisposteCorrette, percentualeRisposteErrate)
+    }
+
+
 
 }
 
@@ -157,46 +177,44 @@ const handlerRisposta = (opzioneSelezionata) => {
         alert('errato')
     }
 
-    // vai alla prossima domanda
-    indiceDomandaCorrente++
-
-
     // controllare se le domande sono finite
     if (indiceDomandaCorrente < quiz.length) {
         vaiAllaProssimaDomanda()
     } else {
 
-        const percentualeRisposteCorrette = ((punteggioTotale * 100) / quiz.length).toFixed(1)
-        const percentualeRisposteErrate = 100 - percentualeRisposteCorrette
-
-        paginaCorrente++
-        displayPaginaCorrente()
-
-        console.log('Quiz completato')
-        console.log('Punteggio totale: ', punteggioTotale)
-        console.log('Risposte corrette: ', punteggioTotale + '/' + quiz.length)
-        console.log('Percentuale risposte corrette: ', percentualeRisposteCorrette + '%')
-        console.log('Percentuale risposte errate: ', percentualeRisposteErrate + '%')
-
-        // inserimento dati paginaRisultati
-
-        const spanCorrette = document.querySelector('#risposteCorrette span')
-        spanCorrette.textContent = percentualeRisposteCorrette + '%'
-
-        const pCorrette = document.querySelector('#risposteCorrette p')
-        pCorrette.textContent = punteggioTotale + '/' + quiz.length + ' questions'
-
-        const spanErrate = document.querySelector('#risposteErrate span')
-        spanErrate.textContent = percentualeRisposteErrate + '%'
-
-        const pErrate = document.querySelector('#risposteErrate p')
-        pErrate.textContent = quiz.length - punteggioTotale + '/' + quiz.length + ' questions'
+        return false
 
     }
 }
 
+// gestione grafico donut
+
+function updateDashArray(percentage1, percentage2) {
+    const circles = document.getElementsByClassName('donut-segment');
+
+    Array.from(circles).forEach((circle) => {
+        const totalLength = Math.PI * parseFloat(circle.r.baseVal.value) * 2;
+        const dashValue1 = (percentage1 / 100) * totalLength;
+        const dashValue2 = (percentage2 / 100) * totalLength;
+
+        circle.style.strokeDasharray = `${dashValue1} ${dashValue2}`;
+    });
+}
+// updateDashArray(50, 50); // esempio per inserire il 50% all'interno del grafico
 
 
+// vai alla pagina feedback
 
-vaiAllaPaginaSuccessiva('#bottonerateus')
+const vaiAllaPaginaFeedback = () => {
+    const button = document.querySelector('#bottoneRateUs')
+
+    button.addEventListener('click', (e) => {
+        e.preventDefault()
+        paginaCorrente = 3
+        displayPaginaCorrente()
+        console.log('clicked')
+    })
+}
+
+vaiAllaPaginaFeedback()
 

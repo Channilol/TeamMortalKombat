@@ -1,0 +1,115 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SVG Percentage doughnut</title>
+    <style>
+      @keyframes donut-chart-fill {
+        to {
+          stroke-dasharray: 0 100;
+        }
+      }
+      body {
+        font-size: 16px;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      .svg-item {
+        width: 450px;
+        height: 450px;
+        font-size: 16px;
+      }
+      .donut-ring {
+        stroke: #ebebeb;
+      }
+
+      .donut-segment {
+        animation: donut-chart-fill 1s reverse ease-in;
+        transform-origin: center;
+        stroke: #ff6200;
+      }
+
+      .donut-text {
+        font-family: Arial, Helvetica, sans-serif;
+        fill: #ff6200;
+      }
+
+      .donut-label {
+        font-size: 0.28em;
+        font-weight: 700;
+        line-height: 1;
+        fill: #000;
+        transform: translateY(0.25em);
+      }
+
+      .donut-percent {
+        font-size: 0.5em;
+        fill: #ff6200;
+        line-height: 1;
+        transform: translateY(0.5em);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="svg-item">
+      <svg width="100%" height="100%" viewBox="0 0 160 160" class="donut">
+        <circle
+          class="donut-hole"
+          cx="80"
+          cy="80"
+          r="63.66"
+          fill="#fff"
+        ></circle>
+        <circle
+          class="donut-ring"
+          cx="80"
+          cy="80"
+          r="63.66"
+          fill="transparent"
+          stroke-width="20"
+        ></circle>
+        <circle
+          class="donut-segment"
+          cx="80"
+          cy="80"
+          r="63.66"
+          fill="transparent"
+          stroke-width="20"
+          stroke-dasharray="134.8 265.2"
+          stroke-dashoffset="100"
+        ></circle>
+        <!-- Increase the radius r -->
+        <g class="donut-text">
+          <text y="20%" transform="translate(0, 4)">
+            <tspan x="50%" text-anchor="middle" class="donut-percent">
+              40%
+            </tspan>
+          </text>
+          <!-- Adding a paragraph -->
+          <text y="40%" transform="translate(0, 4)" font-size="6px">
+            <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+              This is a small paragraph
+            </tspan>
+          </text>
+          <text y="44%" transform="translate(0, 4)" font-size="6px">
+            <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+              inside the SVG.
+            </tspan>
+          </text>
+        </g>
+      </svg>
+    </div>
+
+    <h2>How it works</h2>
+    <p>
+      To change the percentage update the stroke-dasharray in circle class
+      donut-segment. <br />
+      stroke-dasharray="40 60" is 40% filled <br />
+      stroke-dasharray="80 20" is 80% filled
+    </p>
+  </body>
+</html>
