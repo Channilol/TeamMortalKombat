@@ -8,10 +8,10 @@
   </head>
   <body>
     <header>
-      <img src="Assets/IMG/epicode_logo.png" alt="EpicodeLogo" />
+      <img src="Assets/IMG/epicode_logo.png" alt="EpicodeLogo" /> 
     </header>
     <main>
-       <div id="paginaWelcome">
+       <div id="paginaWelcome">     <!-- PAGINA 1 -->
         <div>
           <h1>Welcome to <br><span>your exam</span></h1>
         </div>
@@ -33,26 +33,21 @@
             <li>This exam will take approx. <span>0-5 minutes</span>.</li>
           </ul>
         </div>
-        <form action="">
+        <form>
           <div id="checkBoxDiv">
-            <input
-              type="checkbox"
-              id="checkBoxObbligatoria"
-              name="checkBoxObbligatoria"
-              required
-            />
-            <label for="checkboxobbligatoria">
+            <input type="checkbox" id="checkBoxObbligatoria" name="checkBoxObbligatoria">
+            <label for="checkBoxObbligatoria">
               <span>I promise to answer myself without help from anyone</span>
             </label>
           </div>
           <div id="divBottoneProceed">
-            <button type="submit" id="bottoneProceed" name="bottoneProceed">
+            <button type="button" id="bottoneProceed" name="bottoneProceed">
               PROCEED
             </button>
           </div>
         </form>
       </div> 
-      <div id="paginaDomande">
+      <div id="paginaDomande">     <!-- PAGINA 2 -->
         <div id="timer">
           <p id="timerP">SECONDS</p>
           <p>16</p>
@@ -63,13 +58,13 @@
             <button>1check</button>
             <button>2checkbox</button>
             <button>3checkbox</button>
-            <button>4button</code></button>
+            <button>4button</button>
         </div>
         <div id="paginaDomandeDivP">
           <p>QUESTION 1<span>/10</span></p>
         </div>
       </div>
-      <div id="paginaRisultati">
+      <div id="paginaRisultati">     <!-- PAGINA 3 -->
         <h1>Results</h1>
         <p id="summaryP">The summary of your answer:</p>
         <div id="divCorrectWrongGrafico">
@@ -93,7 +88,7 @@
           <button id="bottoneRateUs">RATE US</button>
         </div>
       </div>
-      <div id="paginaFeedback">
+      <div id="paginaFeedback">     <!-- PAGINA 4 -->
         <h1>Tell us how it's going</h1>
         <p>
           From 0 to 10, how likely are you to recommend EPICODE<br>to a friend or a
@@ -112,7 +107,7 @@
           <img src="Assets/IMG/star.svg" alt="star" />
         </div>
         <p>Leave us an open feedback about your experience so far</p>
-        <form action="">
+        <form>
           <input type="text" placeholder="Write your comment here" />
           <div>
             <button id="bottoneMoreInfo" type="submit">MORE INFO</button>

@@ -1,4 +1,3 @@
-
 const paginaWelcome = document.querySelector('#paginaWelcome')
 const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
@@ -10,14 +9,27 @@ paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'none'
 paginaFeedback.style.display = 'none'
 
-const mostraPaginaDue = () => {
+document.addEventListener('DOMContentLoaded', () => {
     const bottoneProceed = document.querySelector('#bottoneProceed')
-    bottoneProceed.addEventListener('click', () => displayDue())
-}
+    const checkBoxObbligatoria = document.querySelector('#checkBoxObbligatoria')
 
-function displayDue() {
-    paginaWelcome.style.display = 'none'
-    paginaDomande.style.display = 'block'
-}
+    checkBoxObbligatoria.addEventListener('change', () => {
+        bottoneProceed.disabled = !checkBoxObbligatoria.checked
+    })
 
-mostraPaginaDue()
+    bottoneProceed.addEventListener('click', (event) => {
+        if (checkBoxObbligatoria.checked) {
+            displayDue()
+            event.preventDefault();
+        }
+        else {
+            alert('Before proceeding to the test check all boxes')
+        }
+    })
+    
+})
+
+const displayDue = (e) => {
+    paginaWelcome.style.display = 'none';
+    paginaDomande.style.display = 'block';
+}
