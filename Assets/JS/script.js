@@ -41,7 +41,6 @@ const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
 const paginaFeedback = document.querySelector('#paginaFeedback')
 
-
 // stato iniziale
 
 paginaDomande.style.display = 'none'
@@ -81,7 +80,8 @@ const vaiAllaPaginaSuccessiva = (idBottone) => {
 
         paginaCorrente++
 
-        if (paginaCorrente === 1) {
+        if (paginaCorrente == 1) {
+            console.log('Timer iniziato')
             startTimer()
         }
 
@@ -151,6 +151,7 @@ const vaiAllaProssimaDomanda = () => {
         mostraDomande()
     }
     startTimer()
+
 }
 
 const handlerRisposta = (opzioneSelezionata) => {
@@ -165,6 +166,10 @@ const handlerRisposta = (opzioneSelezionata) => {
 
     // vai alla prossima domanda
     indiceDomandaCorrente++
+
+    // reset del timer
+    clearInterval(timerInterval)
+    timeLeft = 4
 
     // controllare se le domande sono finite
     if (indiceDomandaCorrente < quiz.length) {
