@@ -1,10 +1,3 @@
-// selezionato i 4 div
-
-const paginaWelcome = document.querySelector('#paginaWelcome')
-const paginaDomande = document.querySelector('#paginaDomande')
-const paginaRisultati = document.querySelector('#paginaRisultati')
-const paginaFeedback = document.querySelector('#paginaFeedback')
-
 /*********************** VEDERE ALLA FINE ******************/
 // gestione logica del timer
 
@@ -41,6 +34,12 @@ function updateTimer() {
 
 /*************************** VEDERE ALLA FINE ******************/
 
+// selezionato i 4 div
+
+const paginaWelcome = document.querySelector('#paginaWelcome')
+const paginaDomande = document.querySelector('#paginaDomande')
+const paginaRisultati = document.querySelector('#paginaRisultati')
+const paginaFeedback = document.querySelector('#paginaFeedback')
 
 
 // stato iniziale
