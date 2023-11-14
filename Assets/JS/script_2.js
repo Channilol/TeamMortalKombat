@@ -1,7 +1,7 @@
-/*********************** VEDERE ALLA FINE ******************/
-// gestione logica del timer
 
-const countdownElement = document.getElementById('countdown');
+// gestione logica del timer
+/*
+const countdownElement = document.getElementById('timerP');
 let timeLeft = 4; // Durata del timer in secondi
 let timerInterval;
 
@@ -31,8 +31,8 @@ function updateTimer() {
     countdownElement.textContent = `${minutes}:${seconds}`;
 }
 
+*/
 
-/*************************** VEDERE ALLA FINE ******************/
 
 // selezionato i 4 div
 
@@ -50,8 +50,6 @@ paginaFeedback.style.display = 'none'
 // gestione pagina corrente
 
 let paginaCorrente = 0
-
-
 
 const displayPaginaCorrente = () => {
     const pagine = [
@@ -80,11 +78,6 @@ const vaiAllaPaginaSuccessiva = (idBottone) => {
 
         paginaCorrente++
 
-        if (paginaCorrente == 1) {
-            console.log('Timer iniziato')
-            startTimer()
-        }
-
         if (paginaCorrente >= 4) {
             paginaCorrente = 0
         }
@@ -93,7 +86,7 @@ const vaiAllaPaginaSuccessiva = (idBottone) => {
     })
 }
 
-vaiAllaPaginaSuccessiva('#bottoneproceed')
+vaiAllaPaginaSuccessiva('#bottoneProceed')
 
 // logica paginaDomande
 
@@ -125,17 +118,18 @@ const mostraDomande = () => {
 
     const h1 = document.querySelector("#paginaDomande > h1")
 
-    const opzioni = document.querySelector("#opzioni")
+    h1.textContent = domandaCorrente.domanda
+
+    const opzioni = document.querySelector("#opzioni") // div contenitore
 
     opzioni.innerHTML = ''
 
-    h1.textContent = domandaCorrente.domanda
 
-    domandaCorrente.opzioni.forEach((opzione, i) => {
+    domandaCorrente.opzioni.forEach((opzione) => {
         const button = document.createElement('button')
         button.textContent = opzione
 
-        button.addEventListener('click', () => handlerRisposta(opzione))
+        button.addEventListener('click', () => handlerRisposta(opzione));
         opzioni.appendChild(button)
     })
 
@@ -144,13 +138,12 @@ const mostraDomande = () => {
 mostraDomande()
 
 const vaiAllaProssimaDomanda = () => {
-    clearInterval(timerInterval)
-    timeLeft = 4
+
     if (indiceDomandaCorrente < quiz.length) {
         indiceDomandaCorrente++
         mostraDomande()
     }
-    startTimer()
+
 
 }
 
@@ -167,9 +160,6 @@ const handlerRisposta = (opzioneSelezionata) => {
     // vai alla prossima domanda
     indiceDomandaCorrente++
 
-    // reset del timer
-    clearInterval(timerInterval)
-    timeLeft = 4
 
     // controllare se le domande sono finite
     if (indiceDomandaCorrente < quiz.length) {
