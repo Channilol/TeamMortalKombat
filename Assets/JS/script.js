@@ -122,16 +122,23 @@ const domande = [
 
 // TIMER
 
-let secondi = 60
+let secondi
+let timeoutId
 
 const countdown = () => {
     if (secondi > 0) {
         console.log(secondi)
         secondi--
-        setTimeout(countdown, 1000)
+        timeoutId = setTimeout(countdown, 1000)
     } else {
         console.log('tempo scaduto')
     }
+}
+
+const resetCountdown = () => {
+  clearTimeout(timeoutId)
+  secondi = 5
+  countdown()
 }
 
 // Script pagina 1
@@ -160,11 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 })
 
-const displayDue = (e) => {
-    paginaWelcome.style.display = 'none';
-    paginaDomande.style.display = 'block';
-    countdown()
-}
+
 
 // Script pagina 2
 
@@ -173,6 +176,7 @@ let indiceDomandaCorrente = 0
 const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 
 const creazioneDomanda = () => {
+    resetCountdown()
     const h1 = document.querySelector('#titoloDomandaHtml')
     const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
     h1.innerText = domande[indiceDomandaCorrente].titoloDomanda
@@ -197,6 +201,11 @@ const creazioneDomanda = () => {
     }
 }
 
+const displayDue = (e) => {
+  paginaWelcome.style.display = 'none';
+  paginaDomande.style.display = 'block';
+  creazioneDomanda()
+}
 
 let punteggioTotale = 0
 
@@ -209,7 +218,6 @@ const clickRisposta = (risposta) => {
             punteggioTotale++
         } else {
         }
-
     indiceDomandaCorrente++
     divRisposte.innerHTML = ''
     creazioneDomanda()
@@ -223,7 +231,18 @@ const clickRisposta = (risposta) => {
     }
 }
 
-creazioneDomanda()
+const scadereTempo = () => {
+  if (secondi === 0) {
+    indiceDomandaCorrente++
+    creazioneDomanda()
+  } else {
+
+  }
+}
+
+scadereTempo()
+
+//creazioneDomanda()
 
 //Script Pagina 3
 
