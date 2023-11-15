@@ -219,7 +219,7 @@ let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
 
 //calcoli percentuali e interi
 let risposteSbagliate = domande.length - punteggioTotale
-let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
+let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
 let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
 
 //assegnazione calcoli agli elementi html
@@ -227,7 +227,33 @@ percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
 percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
 numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
 numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
+aggiornaGrafico()
 }
+
+//Valori grafico
+
+const aggiornaGrafico = () => {
+    const circles = document.querySelector('.donut-segment')
+    const circonferenzaGrafico = 400
+    let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
+    let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
+    let graficoSbagliate = circonferenzaGrafico - graficoCorrette
+
+    console.log(graficoCorrette)
+    console.log(graficoSbagliate)
+
+    circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
+}
+
+
+
+/* console.log(graficoCorrette)
+console.log(graficoSbagliate)
+
+const donutSegment = document.querySelector('.donut-segment')
+
+donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorrette}`);
+ */
 
 //Display pagina feedback
 const bottoneRateUs = document.querySelector('#bottoneRateUs')
@@ -253,25 +279,26 @@ const stelle = document.querySelectorAll('.stella')
     })
 })  */
 
-for (let i = 0; i < stelle.length; i++) {
+/* for (let i = 0; i < stelle.length; i++) {            TENTATIVO N2
     stelle[i].addEventListener('mouseover', () => {
         for (let j = 0; j <= i; j++) {
             const paths = stelle[j].querySelectorAll('path')
             stelle[j].classList.add('stellaIlluminata')
-/*             for (let k = 0; k < paths.length; k++) {    // TENTATIVO N2
+             for (let k = 0; k < paths.length; k++) {   
                 paths[k].setAttribute('fill', '')
-            } */
+            }
         }
 
         for (let k = i + 1; k < stelle.length; k++) {
             const paths = stelle[k].querySelectorAll('path')
             stelle[k].classList.remove('stellaIlluminata')
-/*             for (let z = 0; z < paths.length; z++) {    // TENTATIVO N2
+            for (let z = 0; z < paths.length; z++) {    
                 paths[z].setAttribute('fill', '')
-            } */
+            } 
         }
     })
-}
+} */
+
 /*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
         for (let j = 0; j <= stelle.length; j++) {
             const paths = stelle[j].querySelectorAll('path')
@@ -282,8 +309,18 @@ for (let i = 0; i < stelle.length; i++) {
         }
     }) */
 
-
-
+for (let i = 0; i < stelle.length; i++) {
+    stelle[i].addEventListener('mouseover', () => {
+        for (let j = 0; j <= i; j++) {
+            const paths = stelle[j].querySelectorAll('path')
+            stelle[j].classList.add('stellaIlluminata')
+        }
+        for (let k = i + 1; k < stelle.length; k++) {
+            const paths = stelle[k].querySelectorAll('path')
+            stelle[k].classList.remove('stellaIlluminata')
+        }
+    })
+}
 
 /* do {
     numeroGenerato = Math.floor(Math.random() * 76) + 1;
