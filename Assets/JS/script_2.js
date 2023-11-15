@@ -253,6 +253,7 @@ const updateDashArray = (percentage1, percentage2) => {
 }
 // updateDashArray(50, 50); // esempio per inserire il 50% all'interno del grafico
 
+updateDashArray(30, 70)
 
 
 
