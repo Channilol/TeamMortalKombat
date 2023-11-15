@@ -49,9 +49,72 @@
       </div> 
       <div id="paginaDomande">     <!-- PAGINA 2 -->
         <div id="timer">
-          <p id="timerP">SECONDS</p>
-          <p>16</p>
-          <p>REMAINING</p>
+          <svg
+          width="60%"
+          height="60%"
+          viewBox="0 0 160 160"
+          class="donut"
+          fill="none"
+        >
+          <circle
+            class="donut-hole"
+            cx="80"
+            cy="80"
+            r="63.66"
+            fill="transparent"
+          ></circle>
+          <circle
+            class="donut-ring2"
+            cx="80"
+            cy="80"
+            r="63.66"
+            fill="transparent"
+            stroke-width="14"
+          ></circle>
+          <circle
+            class="donut-segment2"
+            cx="80"
+            cy="80"
+            r="63.66"
+            fill="transparent"
+            stroke-width="14"
+            stroke-dasharray="50 350"
+            stroke-dashoffset="100"
+          ></circle>
+          <!-- Increase the radius r -->
+          <g class="donut-text">
+<!--             <text y="25%" transform="translate(0, 4)" font-size="15px">
+              <tspan
+                x="50%"
+                text-anchor="middle"
+                class="donut-percent"
+                >
+                
+              </tspan>
+            </text> -->
+            <text y="30%" transform="translate(0, 4)" font-size="12px">
+              <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                Seconds
+              </tspan>
+            </text>
+            <!-- Adding a paragraph -->
+            <text
+              y="55%"
+              transform="translate(0, 4)"
+              font-size="45px"
+              font-weight="bold"
+            >
+              <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                20
+              </tspan>
+            </text>
+            <text y="67.5%" transform="translate(0, 4)" font-size="12px">
+              <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+                remaining
+              </tspan>
+            </text>
+          </g>
+        </svg>
         </div>
         <h1 id="titoloDomandaHtml">How can I create a <span>checkbox in HTML?</span></h1>
         <div id="divContenitoreBottoniDomande">

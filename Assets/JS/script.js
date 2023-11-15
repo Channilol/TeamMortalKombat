@@ -120,6 +120,20 @@ const domande = [
 
 // Status iniziale
 
+// TIMER
+
+let secondi = 60
+
+const countdown = () => {
+    if (secondi > 0) {
+        console.log(secondi)
+        secondi--
+        setTimeout(countdown, 1000)
+    } else {
+        console.log('tempo scaduto')
+    }
+}
+
 // Script pagina 1
 
 paginaDomande.style.display = 'none'
@@ -149,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const displayDue = (e) => {
     paginaWelcome.style.display = 'none';
     paginaDomande.style.display = 'block';
+    countdown()
 }
 
 // Script pagina 2
@@ -182,7 +197,9 @@ const creazioneDomanda = () => {
     }
 }
 
+
 let punteggioTotale = 0
+
 
 //Click risposta + domanda successiva
 
@@ -230,7 +247,7 @@ numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
 aggiornaGrafico()
 }
 
-//Valori grafico
+//Valori GRAFICO
 
 const aggiornaGrafico = () => {
     const circles = document.querySelector('.donut-segment')

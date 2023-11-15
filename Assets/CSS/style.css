@@ -144,22 +144,9 @@ header img {
 
 #timer {
     text-align: center;
-    background-color:#850b60;
     position: absolute;
-    width: 130px;
-    height: 130px;
-    top: 7%;
-    right: 10%;
-    box-shadow: 0px 0px 15px #0f0f0f;
-    border-radius: 55%;
-}
-
-#timer p {
-    margin: 0;
-}
-
-#timerP {
-    padding-top: 33px;
+    top: 6%;
+    right: 3%;
 }
 
 #paginaDomande h1 {
@@ -417,4 +404,15 @@ header img {
   
   #divGraficoResults > svg > g > text:nth-child(2) > tspan {
     fill: #00ffff;
+  }
+
+/* TIMER */
+
+.donut-ring2 {
+    stroke: rgba(0, 0, 0, 0.4);
+  }
+  
+.donut-segment2 {
+    transform-origin: center;
+    stroke: #00ffff;
   }
