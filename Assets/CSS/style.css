@@ -208,6 +208,11 @@ header img {
     color: #c2128d;
 }
 
+#paginaDomandeDivP #numeroDomandaCorrente {
+    color: #dcd2e1;
+    font-weight: 500;
+}
+
 /* PAGINA 3 - MARCO */
 
 #paginaRisultati{
