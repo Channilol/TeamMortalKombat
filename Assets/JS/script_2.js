@@ -7,7 +7,6 @@ const paginaFeedback = document.querySelector('#paginaFeedback')
 
 // stato iniziale
 
-
 paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'none'
 paginaFeedback.style.display = 'none'
@@ -18,6 +17,51 @@ paginaFeedback.style.display = 'none'
 paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'block'
 paginaFeedback.style.display = 'none' */
+
+// stato iniziale per timer
+
+/*
+paginaWelcome.style.display = 'none'
+paginaDomande.style.display = 'block'
+paginaRisultati.style.display = 'none'
+paginaFeedback.style.display = 'none'
+*/
+
+// gestione timer
+
+// aggiornamento del grafico timer delle domande
+
+
+const countdownDisplay = document.getElementById('countdown');
+let timerInterval;
+let timeLeft = 10;
+
+
+const startTimer = () => {
+    timeLeft = 10; // Reset timeLeft to the original value
+    clearInterval(timerInterval); // Clear any existing timerInterval
+
+    timerInterval = setInterval(() => {
+        if (timeLeft >= 0) {
+            countdownDisplay.textContent = timeLeft; // 10 : (400 e 0)= timeLeft : y
+            timeLeft--;
+            console.log('Time left is: ' + timeLeft + 'seconds')
+        } else {
+            clearInterval(timerInterval);
+            console.log('Tempo scaduto');
+            vaiAllaProssimaDomanda()
+        }
+    }, 1000);
+};
+
+const resetTimer = () => {
+    clearInterval(timerInterval); // Clear any existing timerInterval
+    timeLeft = 10; // Reset timeLeft to the original value
+    countdownDisplay.textContent = timeLeft; // Reset countdown display
+};
+
+
+
 
 // gestione pagina corrente
 
@@ -33,8 +77,11 @@ const displayPaginaCorrente = () => {
 
     pagine.forEach((pagina, i) => {
         if (paginaCorrente === i) {
+
             pagina.style.display = 'block'
-        } else {
+
+        }  // fai partire il timer appena viene visualizzata la prima domanda nella pagina 1 (pagina delle domande)
+        else {
             pagina.style.display = 'none'
         }
     })
@@ -56,15 +103,13 @@ const vaiAllaPaginaSuccessiva = (idBottone) => {
                 paginaCorrente = 0
             }
 
+            mostraDomande()
+            startTimer()
             displayPaginaCorrente()
         }
-
         else {
             alert('Devi confermare prima')
         }
-
-
-
 
     })
 }
@@ -104,7 +149,12 @@ const mostraDomande = () => {
 
         const h1 = document.querySelector("#paginaDomande > h1")
 
+        const p = document.querySelector("#paginaDomandeDivP > p")
+
+
         h1.textContent = domandaCorrente.domanda
+
+        p.textContent = 'QUESTION ' + (indiceDomandaCorrente + 1) + '/' + quiz.length
 
         const opzioni = document.querySelector("#divContenitoreBottoniDomande") // div contenitore
 
@@ -155,13 +205,14 @@ const mostraDomande = () => {
 
 }
 
-mostraDomande()
 
 const vaiAllaProssimaDomanda = () => {
 
     if (indiceDomandaCorrente < quiz.length) {
+        resetTimer()
         indiceDomandaCorrente++
         mostraDomande()
+        startTimer()
     }
 
 
@@ -189,7 +240,7 @@ const handlerRisposta = (opzioneSelezionata) => {
 
 // gestione grafico donut
 
-function updateDashArray(percentage1, percentage2) {
+const updateDashArray = (percentage1, percentage2) => {
     const circles = document.getElementsByClassName('donut-segment');
 
     Array.from(circles).forEach((circle) => {
@@ -201,6 +252,8 @@ function updateDashArray(percentage1, percentage2) {
     });
 }
 // updateDashArray(50, 50); // esempio per inserire il 50% all'interno del grafico
+
+
 
 
 // vai alla pagina feedback
