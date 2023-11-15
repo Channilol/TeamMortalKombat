@@ -151,7 +151,7 @@ const displayDue = (e) => {
     paginaDomande.style.display = 'block';
 }
 
-// Script pagina 2 e 3
+// Script pagina 2
 
 let indiceDomandaCorrente = 0
 
@@ -189,10 +189,8 @@ let punteggioTotale = 0
 const clickRisposta = (risposta) => {                                                                   
     if (indiceDomandaCorrente < domande.length - 1) {
         if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
-            alert('risposta giusta')
             punteggioTotale++
         } else {
-            alert('risposta sbagliata')
         }
 
     indiceDomandaCorrente++
@@ -201,17 +199,90 @@ const clickRisposta = (risposta) => {
     } else {
         if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
         punteggioTotale++
-        alert('Risposta giusta')
         }
-    console.log(punteggioTotale)
+    calcoliRisultati()
     paginaDomande.style.display = 'none'
     paginaRisultati.style.display = 'block'
     }
 }
 
-
-
 creazioneDomanda()
+
+//Script Pagina 3
+
+const calcoliRisultati = () => {
+//prendiamo gli elementi html
+let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
+let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
+let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
+let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
+
+//calcoli percentuali e interi
+let risposteSbagliate = domande.length - punteggioTotale
+let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
+let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
+
+//assegnazione calcoli agli elementi html
+percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
+percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
+numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
+numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
+}
+
+//Display pagina feedback
+const bottoneRateUs = document.querySelector('#bottoneRateUs')
+
+const displayQuattro = () => {
+    paginaRisultati.style.display = 'none';
+    paginaFeedback.style.display = 'block';
+}
+
+bottoneRateUs.addEventListener('click', () => displayQuattro())
+
+//Script Pagina 4
+const stelle = document.querySelectorAll('.stella')
+
+/* stelle.forEach((stella, index) => { //ogni stella dell'array stelle    // TENTATIVO N1
+    stella.addEventListener('mouseover', () => { //assegno ad ogni elemento un eventListener mouseover
+        for (let i = 0; i <= index; i++) { // 
+            const paths = stelle[i].querySelectorAll('path') //paths --> array di oggetti pari
+            paths.forEach((path) => {
+                path.setAttribute('fill', '#00ffff')
+            })
+        }
+    })
+})  */
+
+for (let i = 0; i < stelle.length; i++) {
+    stelle[i].addEventListener('mouseover', () => {
+        for (let j = 0; j <= i; j++) {
+            const paths = stelle[j].querySelectorAll('path')
+            stelle[j].classList.add('stellaIlluminata')
+/*             for (let k = 0; k < paths.length; k++) {    // TENTATIVO N2
+                paths[k].setAttribute('fill', '')
+            } */
+        }
+
+        for (let k = i + 1; k < stelle.length; k++) {
+            const paths = stelle[k].querySelectorAll('path')
+            stelle[k].classList.remove('stellaIlluminata')
+/*             for (let z = 0; z < paths.length; z++) {    // TENTATIVO N2
+                paths[z].setAttribute('fill', '')
+            } */
+        }
+    })
+}
+/*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
+        for (let j = 0; j <= stelle.length; j++) {
+            const paths = stelle[j].querySelectorAll('path')
+            stelle[j].classList.remove('stellaIlluminata')
+            for (let k = 0; k < paths.length; k++) {
+                paths[k].setAttribute('fill', '')
+            }
+        }
+    }) */
+
+
 
 
 /* do {
