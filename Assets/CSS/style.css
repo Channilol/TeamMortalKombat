@@ -86,11 +86,23 @@ header img {
   transition-duration: 0.3s;
   background-color: transparent;
   cursor: pointer;
+  position: relative;
 }
 
 #paginaWelcome form input[type='checkbox']:checked {
   border: 1px solid black;
-  background-color: white;
+  background-color: #ffffff;
+}
+
+#paginaWelcome form input[type='checkbox']:checked:before {
+  content: '\2713';
+  font-size: 21px;
+  font-weight: 800;
+  color: rgb(0, 0, 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #paginaWelcome button {
@@ -101,9 +113,14 @@ header img {
   font-weight: 700;
   text-shadow: 0px 1px 1px #0a9191;
   margin: 0;
+  cursor: pointer;
 }
 
 #paginaWelcome button:hover {
+  box-shadow: 0px 0px 25px #00ffff;
+}
+
+#paginaWelcome button:active {
   box-shadow: 0px 0px 25px #00ffff;
 }
 
