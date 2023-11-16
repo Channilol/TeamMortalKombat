@@ -3,10 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Assets/CSS/style.css" />
     <title>Document</title>
   </head>
   <body>
     <h1>TIMER</h1>
+    <div id="timer">
+      <svg
+        width="60%"
+        height="60%"
+        viewBox="0 0 160 160"
+        class="donut"
+        fill="none"
+      >
+        <circle
+          class="donut-hole"
+          cx="80"
+          cy="80"
+          r="63.66"
+          fill="transparent"
+        ></circle>
+        <circle
+          class="donut-ring2"
+          cx="80"
+          cy="80"
+          r="63.66"
+          fill="transparent"
+          stroke-width="14"
+        ></circle>
+        <circle
+          class="donut-segment2"
+          cx="80"
+          cy="80"
+          r="63.66"
+          fill="transparent"
+          stroke-width="14"
+          stroke-dasharray="50 350"
+          stroke-dashoffset="100"
+        ></circle>
+        <!-- Increase the radius r -->
+        <g class="donut-text">
+          <text y="30%" transform="translate(0, 4)" font-size="12px">
+            <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+              Seconds
+            </tspan>
+          </text>
+          <!-- Adding a paragraph -->
+          <text
+            y="55%"
+            transform="translate(0, 4)"
+            font-size="45px"
+            font-weight="bold"
+          >
+            <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+              20
+            </tspan>
+          </text>
+          <text y="67.5%" transform="translate(0, 4)" font-size="12px">
+            <tspan x="50%" text-anchor="middle" class="donut-paragraph">
+              remaining
+            </tspan>
+          </text>
+        </g>
+      </svg>
+    </div>
   </body>
   <script src="Assets/JS/timer_script.js"></script>
+  <script>
+    // imposta il tempo iniziale del timer
+    let timeInSeconds = 20;
+    const donutSegment = document.querySelector('.donut-segment2');
+
+    // Calcola la circonferenza del cerchio (2πr)
+    const radius = parseFloat(donutSegment.getAttribute('r'));
+    const circumference = 2 * Math.PI * radius;
+
+    // Aggiorna l'animazione del teimer in maniera dinamica
+    const updateTimer = (time) => {
+      const percentage = time / 20; // 20 -> se il timer comincia a 20 secondi
+      const dashOffset = circumference * (1 - percentage); // aggiorna sempre dove parte la circonfere
+      donutSegment.style.strokeDasharray = `${circumference} ${circumference}`; // aggirna la percentuale del cerchio
+      donutSegment.style.strokeDashoffset = dashOffset; // ruota l'offset
+    };
+
+    // Funzione del timer
+    const startTimer = () => {
+      const timerInterval = setInterval(() => {
+        if (timeInSeconds > 0) {
+          updateTimer(timeInSeconds);
+          timeInSeconds--;
+        } else {
+          clearInterval(timerInterval);
+
+          alert('Tempo scaduto');
+        }
+      }, 1000); // Aggiorna il timer ogni secondo
+    };
+
+    // Inizializza il timer una volta caricata la pagina
+    window.onload = startTimer;
+  </script>
 </html>

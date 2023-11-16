@@ -415,4 +415,8 @@ header img {
 .donut-segment2 {
   transform-origin: center;
   stroke: #00ffff;
+  stroke-dasharray: 0 1000;
+  transition: stroke-dasharray 0.5s linear;
+  transform: rotate(-90deg); /* Rotate the circle to start above the number */
+  transform-origin: 50% 50%; /* Set the transform origin to the center */
 }
