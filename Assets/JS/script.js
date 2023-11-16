@@ -492,6 +492,8 @@ difficoltaFacile()
 difficoltaMedia()
 difficoltaDifficile()
 
+
+
 // Script pagina 2
 
 // Funzione generazione numeri random 0-3
@@ -512,6 +514,21 @@ const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 
 //
 
+
+// numero di domande
+
+let numeroDomande
+
+const numeroDomandeScelto = () => {
+  const inputNumero = document.querySelector('#numeroDomandeScelte')
+  inputNumero.addEventListener('input', () => {
+    numeroDomande = parseInt(inputNumero.value, 10)
+  })
+}
+
+
+numeroDomandeScelto()
+
 const creazioneDomanda = () => {
   resetCountdown()
   resetTimerSVG()
@@ -523,6 +540,10 @@ const creazioneDomanda = () => {
   else if (difficolta === 'difficile') {
     domande = domandeDifficili
   }
+
+  console.log(numeroDomande)
+
+  domande.length = numeroDomande
 
   const h1 = document.querySelector('#titoloDomandaHtml')
   const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
