@@ -87,15 +87,26 @@ header img {
   transition-duration: 0.3s;
   background-color: transparent;
   cursor: pointer;
+  position: relative;
 }
 
 #paginaWelcome form input[type='checkbox']:checked {
   border: 1px solid black;
-  background-color: white;
+  background-color: #ffffff;
+}
+
+#paginaWelcome form input[type='checkbox']:checked:before {
+  content: '\2713';
+  font-size: 21px;
+  font-weight: 800;
+  color: rgb(0, 0, 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #paginaWelcome button {
-<<<<<<< HEAD
   padding: 2vh 5vw 2vh 5vw;
   background-color: #00ffff;
   border: 0;
@@ -104,18 +115,8 @@ header img {
   text-shadow: 0px 1px 1px #0a9191;
   margin: 0;
   cursor: pointer;
-=======
-    padding: 2vh 5vw 2vh 5vw;
-    background-color: #00ffff;
-    border: 0;
-    font-size: 1.3em;
-    font-weight: 700;
-    text-shadow: 0px 1px 1px #0a9191;
-    margin: 0;
-    cursor: pointer;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-    transition: box-shadow 0.2s ease;
->>>>>>> 7ac9a6e24f50f7e02a37f5f6d2d5d0e6718577ea
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  transition: box-shadow 0.2s ease;
 }
 
 #paginaWelcome button:hover {
@@ -123,11 +124,7 @@ header img {
 }
 
 #paginaWelcome button:active {
-<<<<<<< HEAD
-  box-shadow: 0px 0px 25px #00ffff;
-=======
-    box-shadow: 0px 0px 25px #ffffff;
->>>>>>> 7ac9a6e24f50f7e02a37f5f6d2d5d0e6718577ea
+  box-shadow: 0px 0px 25px #ffffff;
 }
 
 #checkBoxDiv {
@@ -166,7 +163,6 @@ header img {
 }
 
 #paginaDomande button {
-<<<<<<< HEAD
   width: 25vw;
   margin: 1.5vh 2vw;
   padding: 2.5vh 0;
@@ -176,32 +172,14 @@ header img {
   border-radius: 35px;
   font-size: 1.3em;
   font-weight: 500;
+  transition: background 1.5s ease;
 }
 
 #paginaDomande button:hover {
   background: linear-gradient(#c2128d, #850b60);
-  /*     background-color: #0a9191; */
   border: 3px solid #df4ab2;
   cursor: pointer;
-=======
-    width: 25vw;
-    margin: 1.5vh 2vw;
-    padding: 2.5vh 0;
-    background-color: rgba(255, 255, 255, 0.13);
-    color: #dcd2e1;
-    border: 3px solid #ffffff;
-    border-radius: 35px;
-    font-size: 1.3em;
-    font-weight: 500;
-    transition: background 1.5s ease;
-}
-
-#paginaDomande button:hover {
-    background: linear-gradient(#c2128d, #850b60);
-    border: 3px solid #df4ab2;
-    cursor: pointer;
-    transition: background 1.5s ease;
->>>>>>> 7ac9a6e24f50f7e02a37f5f6d2d5d0e6718577ea
+  transition: background 1.5s ease;
 }
 
 #paginaDomande .bottoneRispostaCorretta:active {
@@ -339,7 +317,6 @@ header img {
 }
 
 #divRateUs button {
-<<<<<<< HEAD
   padding: 1.5vh 5vw 1.5vh 5vw;
   background-color: rgba(255, 255, 255, 0);
   border: 2px solid #dcd2e1;
@@ -347,17 +324,8 @@ header img {
   font-size: 1.2em;
   font-weight: 600;
   letter-spacing: 1px;
-=======
-    padding: 1.5vh 5vw 1.5vh 5vw;
-    background-color: rgba(255, 255, 255, 0);
-    border: 2px solid #dcd2e1;
-    color: #dcd2e1;
-    font-size: 1.2em;
-    font-weight: 600;
-    letter-spacing: 1px;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-    transition: box-shadow 0.2s ease;
->>>>>>> 7ac9a6e24f50f7e02a37f5f6d2d5d0e6718577ea
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  transition: box-shadow 0.2s ease;
 }
 
 #divRateUs button:hover {
@@ -401,23 +369,14 @@ header img {
 }
 
 #paginaFeedback button {
-<<<<<<< HEAD
   padding: 2vh 4vw 2vh 4vw;
   background-color: #00ffff;
   border: 0;
   font-size: 1.3em;
   font-weight: 700;
   text-shadow: 0px 1px 1px #0a9191;
-=======
-    padding: 2vh 4vw 2vh 4vw;
-    background-color: #00ffff;
-    border: 0;
-    font-size: 1.3em;
-    font-weight: 700;
-    text-shadow: 0px 1px 1px #0a9191;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-    transition: box-shadow 0.2s ease;
->>>>>>> 7ac9a6e24f50f7e02a37f5f6d2d5d0e6718577ea
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  transition: box-shadow 0.2s ease;
 }
 
 #paginaFeedback button:hover {
@@ -493,22 +452,10 @@ header img {
   stroke: #00ffff;
 }
 
-/* 
-  
-  .donut-segment2 {
-  transform-origin: center;
-  stroke: #00ffff;
-  stroke-dasharray: 0 1000;
-  transition: stroke-dasharray 0.5s linear;
-  transform: rotate(-90deg); 
-  transform-origin: 50% 50%; 
-  
-  */
-
 .animationTimer {
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
-  animation: fillDonut 5s linear forwards;
+  animation: fillDonut 60s linear forwards;
   transform-origin: 50% 50%; /* Imposta il punto di origine della trasformazione */
   transform: rotate(-90deg);
 }
@@ -518,5 +465,3 @@ header img {
     stroke-dashoffset: 0;
   }
 }
-
-/* */
