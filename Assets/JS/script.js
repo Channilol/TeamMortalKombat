@@ -492,23 +492,6 @@ difficoltaFacile()
 difficoltaMedia()
 difficoltaDifficile()
 
-let lunghezzaDomande;
-
-const numeroDomandeScelte = () => {
-  const inputNumero = document.querySelector('#'); // Replace '#inputNumero' with your actual selector
-
-  inputNumero.addEventListener('input', () => {
-    const value = inputNumero.value;
-
-    lunghezzaDomande = value
-
-
-  });
-};
-
-numeroDomandeScelte();
-
-
 // Script pagina 2
 
 // Funzione generazione numeri random 0-3
@@ -540,8 +523,6 @@ const creazioneDomanda = () => {
   else if (difficolta === 'difficile') {
     domande = domandeDifficili
   }
-
-  domande.length = lunghezzaDomande
 
   const h1 = document.querySelector('#titoloDomandaHtml')
   const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
