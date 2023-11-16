@@ -171,12 +171,29 @@ header img {
 
 #paginaDomande button:hover {
     background: linear-gradient(#c2128d, #850b60);
+/*     background-color: #0a9191; */
     border: 3px solid #df4ab2;
     cursor: pointer;
 }
 
-#paginaDomande button:active {
-    border: 3px solid #860560;
+#paginaDomande .bottoneRispostaCorretta:active {
+    background: linear-gradient(#12c238, #0b8515);
+    border: 3px solid #05860b;
+}
+
+#paginaDomande .bottoneRispostaSbagliata:active {
+    background: linear-gradient(#c2124d, #850b1f);
+    border: 3px solid #860525;
+}
+
+#paginaDomande .bottoneRispostaCorrettaCliccato {
+    background: linear-gradient(#12c238, #0b8515);
+    border: 3px solid #09ca13;
+}
+
+#paginaDomande .bottoneRispostaSbagliataCliccato {
+    background: linear-gradient(#c2124d, #850b1f);
+    border: 3px solid #b40934;
 }
 
 #divContenitoreBottoniDomande {
