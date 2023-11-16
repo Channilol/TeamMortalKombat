@@ -121,7 +121,6 @@ let indiceDomandaCorrente = 0
 
 let punteggioTotale = 0
 
-
 // Status iniziale
 
 // TIMER
@@ -132,7 +131,6 @@ let timeoutId
 let numeriSecondi = document.querySelector('.testoSecondi')
 let donutTimer = document.querySelector('.animationTimer');
 
-
 const countdown = () => {
   if (secondi > 0) {
     numeriSecondi.innerHTML = secondi
@@ -142,7 +140,6 @@ const countdown = () => {
     clickRisposta()
   }
 }
-
 
 const resetCountdown = () => {
   clearTimeout(timeoutId)
@@ -186,13 +183,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-
-
 // Script pagina 2
 
+// Funzione generazione numeri random 0-3
 
+const rispostaRandomica = () => {
+  arrayNumeriEstratti = []
+  while (arrayNumeriEstratti.length < domande[indiceDomandaCorrente].risposte.length) {
+    numeroGenerato = Math.floor(Math.random() * domande[indiceDomandaCorrente].risposte.length);
+
+    if (!arrayNumeriEstratti.includes(numeroGenerato)) {
+      arrayNumeriEstratti.push(numeroGenerato);
+    }
+  }
+  return arrayNumeriEstratti
+}
 
 const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
+
+//
 
 const creazioneDomanda = () => {
   resetCountdown()
@@ -201,34 +210,49 @@ const creazioneDomanda = () => {
   const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
   h1.innerText = domande[indiceDomandaCorrente].titoloDomanda
   numeroDomandaCorrente.innerText = indiceDomandaCorrente + 1
-
   if (domande[indiceDomandaCorrente].tipo === 'multiple') {
+    const numeriEstratti = rispostaRandomica()
     for (let i = 0; i < domande[indiceDomandaCorrente].risposte.length; i++) {
       const risposta = document.createElement('button')
-      const testoRisposta = domande[indiceDomandaCorrente].risposte[i]
+      const testoRisposta = domande[indiceDomandaCorrente].risposte[numeriEstratti[i]]
       risposta.textContent = testoRisposta
+      if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+        risposta.classList.add('bottoneRispostaCorretta')
+      } else {
+        risposta.classList.add('bottoneRispostaSbagliata')
+      }
       divRisposte.appendChild(risposta)
       risposta.addEventListener('click', () => clickRisposta(testoRisposta))
     }
+
   } else {
+    const numeriEstratti = rispostaRandomica()
     for (let j = 0; j < domande[indiceDomandaCorrente].risposte.length; j++) {
       const risposta = document.createElement('button')
-      const testoRisposta = domande[indiceDomandaCorrente].risposte[j]
+      const testoRisposta = domande[indiceDomandaCorrente].risposte[numeriEstratti[j]]
       risposta.textContent = testoRisposta
+      if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+        risposta.classList.add('bottoneRispostaCorretta')
+      } else {
+        risposta.classList.add('bottoneRispostaSbagliata')
+      }
       divRisposte.appendChild(risposta)
       risposta.addEventListener('click', () => clickRisposta(testoRisposta))
     }
   }
 }
 
+/* 
+arrayNumeriEstratti = []
+do {
+    numeroGenerato = Math.floor(Math.random() * 4);
+} while (arrayNumeriEstratti.includes(numeroGenerato)); */
+
 const displayDue = (e) => {
   paginaWelcome.style.display = 'none';
   paginaDomande.style.display = 'block';
   creazioneDomanda()
 }
-
-
-
 
 //Click risposta + domanda successiva
 
@@ -263,10 +287,7 @@ const clickRisposta = (risposta) => {
       paginaDomande.style.display = 'none';
       paginaRisultati.style.display = 'block';
     }
-  }, 1000); // Adjust the delay time as needed (in milliseconds)
-};
-
-
+  }
 
 /* const scadereTempo = () => {
   if (secondi === 0) {
@@ -282,133 +303,129 @@ const clickRisposta = (risposta) => {
 //Script Pagina 3
 
 const calcoliRisultati = () => {
-  //prendiamo gli elementi html
-  let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
-  let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
-  let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
-  let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
+    //prendiamo gli elementi html
+    let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
+    let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
+    let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
+    let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
 
-  //calcoli percentuali e interi
-  let risposteSbagliate = domande.length - punteggioTotale
-  let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
-  let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
+    //calcoli percentuali e interi
+    let risposteSbagliate = domande.length - punteggioTotale
+    let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
+    let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
 
-  //assegnazione calcoli agli elementi html
-  percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
-  percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
-  numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
-  numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
-  aggiornaGrafico()
-  aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
-}
-
-//Valori GRAFICO
-
-const aggiornaGrafico = () => {
-  const circles = document.querySelector('.donut-segment')
-  const circonferenzaGrafico = 400
-  let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
-  let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
-  let graficoSbagliate = circonferenzaGrafico - graficoCorrette
-
-  console.log(graficoCorrette)
-  console.log(graficoSbagliate)
-
-  circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
-}
-
-const aggiornaTestoGraficoRisultati = (percentuale) => {
-  const titolo = document.querySelector('.donutGraficoP1')
-  const titoloColorato = document.querySelector('.donutGraficoP2')
-  const p1 = document.querySelector('.donutGraficoP3')
-  const p2 = document.querySelector('.donutGraficoP4')
-
-  if (percentuale < 60) {
-    titolo.innerHTML = "I'm sorry!"
-    titoloColorato.style.fill = '#c2128d'
-    titoloColorato.innerHTML = "You failed the exam"
-    p1.innerHTML = 'You have not'
-    p2.innerHTML = 'passed the exam'
+    //assegnazione calcoli agli elementi html
+    percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
+    percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
+    numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
+    numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
+    aggiornaGrafico()
+    aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
   }
-}
 
-/* console.log(graficoCorrette)
-console.log(graficoSbagliate)
+  //Valori GRAFICO
 
-const donutSegment = document.querySelector('.donut-segment')
+  const aggiornaGrafico = () => {
+    const circles = document.querySelector('.donut-segment')
+    const circonferenzaGrafico = 400
+    let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
+    let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
+    let graficoSbagliate = circonferenzaGrafico - graficoCorrette
+    circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
+  }
 
-donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorrette}`);
- */
+  const aggiornaTestoGraficoRisultati = (percentuale) => {
+    const titolo = document.querySelector('.donutGraficoP1')
+    const titoloColorato = document.querySelector('.donutGraficoP2')
+    const p1 = document.querySelector('.donutGraficoP3')
+    const p2 = document.querySelector('.donutGraficoP4')
 
-//Display pagina feedback
-const bottoneRateUs = document.querySelector('#bottoneRateUs')
+    if (percentuale < 60) {
+      titolo.innerHTML = "I'm sorry!"
+      titoloColorato.style.fill = '#c2128d'
+      titoloColorato.innerHTML = "You failed the exam"
+      p1.innerHTML = 'You have not'
+      p2.innerHTML = 'passed the exam'
+    }
+  }
 
-const displayQuattro = () => {
-  paginaRisultati.style.display = 'none';
-  paginaFeedback.style.display = 'block';
-}
+  /* console.log(graficoCorrette)
+  console.log(graficoSbagliate)
+  
+  const donutSegment = document.querySelector('.donut-segment')
+  
+  donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorrette}`);
+   */
 
-bottoneRateUs.addEventListener('click', () => displayQuattro())
+  //Display pagina feedback
+  const bottoneRateUs = document.querySelector('#bottoneRateUs')
 
-//Script Pagina 4
-const stelle = document.querySelectorAll('.stella')
+  const displayQuattro = () => {
+    paginaRisultati.style.display = 'none';
+    paginaFeedback.style.display = 'block';
+  }
 
-/* stelle.forEach((stella, index) => { //ogni stella dell'array stelle    // TENTATIVO N1
-    stella.addEventListener('mouseover', () => { //assegno ad ogni elemento un eventListener mouseover
-        for (let i = 0; i <= index; i++) { // 
-            const paths = stelle[i].querySelectorAll('path') //paths --> array di oggetti pari
-            paths.forEach((path) => {
-                path.setAttribute('fill', '#00ffff')
-            })
-        }
-    })
-})  */
+  bottoneRateUs.addEventListener('click', () => displayQuattro())
 
-/* for (let i = 0; i < stelle.length; i++) {            TENTATIVO N2
+  //Script Pagina 4
+  const stelle = document.querySelectorAll('.stella')
+
+  /* stelle.forEach((stella, index) => { //ogni stella dell'array stelle    // TENTATIVO N1
+      stella.addEventListener('mouseover', () => { //assegno ad ogni elemento un eventListener mouseover
+          for (let i = 0; i <= index; i++) { // 
+              const paths = stelle[i].querySelectorAll('path') //paths --> array di oggetti pari
+              paths.forEach((path) => {
+                  path.setAttribute('fill', '#00ffff')
+              })
+          }
+      })
+  })  */
+
+  /* for (let i = 0; i < stelle.length; i++) {            TENTATIVO N2
+      stelle[i].addEventListener('mouseover', () => {
+          for (let j = 0; j <= i; j++) {
+              const paths = stelle[j].querySelectorAll('path')
+              stelle[j].classList.add('stellaIlluminata')
+               for (let k = 0; k < paths.length; k++) {   
+                  paths[k].setAttribute('fill', '')
+              }
+          }
+  
+          for (let k = i + 1; k < stelle.length; k++) {
+              const paths = stelle[k].querySelectorAll('path')
+              stelle[k].classList.remove('stellaIlluminata')
+              for (let z = 0; z < paths.length; z++) {    
+                  paths[z].setAttribute('fill', '')
+              } 
+          }
+      })
+  } */
+
+  /*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
+          for (let j = 0; j <= stelle.length; j++) {
+              const paths = stelle[j].querySelectorAll('path')
+              stelle[j].classList.remove('stellaIlluminata')
+              for (let k = 0; k < paths.length; k++) {
+                  paths[k].setAttribute('fill', '')
+              }
+          }
+      }) */
+
+  for (let i = 0; i < stelle.length; i++) {
     stelle[i].addEventListener('mouseover', () => {
-        for (let j = 0; j <= i; j++) {
-            const paths = stelle[j].querySelectorAll('path')
-            stelle[j].classList.add('stellaIlluminata')
-             for (let k = 0; k < paths.length; k++) {   
-                paths[k].setAttribute('fill', '')
-            }
-        }
-
-        for (let k = i + 1; k < stelle.length; k++) {
-            const paths = stelle[k].querySelectorAll('path')
-            stelle[k].classList.remove('stellaIlluminata')
-            for (let z = 0; z < paths.length; z++) {    
-                paths[z].setAttribute('fill', '')
-            } 
-        }
+      for (let j = 0; j <= i; j++) {
+        const paths = stelle[j].querySelectorAll('path')
+        stelle[j].classList.add('stellaIlluminata')
+      }
+      for (let k = i + 1; k < stelle.length; k++) {
+        const paths = stelle[k].querySelectorAll('path')
+        stelle[k].classList.remove('stellaIlluminata')
+      }
     })
-} */
+  }
 
-/*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
-        for (let j = 0; j <= stelle.length; j++) {
-            const paths = stelle[j].querySelectorAll('path')
-            stelle[j].classList.remove('stellaIlluminata')
-            for (let k = 0; k < paths.length; k++) {
-                paths[k].setAttribute('fill', '')
-            }
-        }
-    }) */
-
-for (let i = 0; i < stelle.length; i++) {
-  stelle[i].addEventListener('mouseover', () => {
-    for (let j = 0; j <= i; j++) {
-      const paths = stelle[j].querySelectorAll('path')
-      stelle[j].classList.add('stellaIlluminata')
-    }
-    for (let k = i + 1; k < stelle.length; k++) {
-      const paths = stelle[k].querySelectorAll('path')
-      stelle[k].classList.remove('stellaIlluminata')
-    }
-  })
-}
-
-const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
-bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
+  const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
+  bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
 
 /* do {
     numeroGenerato = Math.floor(Math.random() * 76) + 1;
