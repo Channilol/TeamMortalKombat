@@ -117,31 +117,48 @@ const indiceDomande = 0
 
 const indiceRisposte = []
 
+let indiceDomandaCorrente = 0
+
+let punteggioTotale = 0
+
 
 // Status iniziale
 
 // TIMER
 
-let secondi
+let secondi = 60
 let timeoutId
+
+let numeriSecondi = document.querySelector('.testoSecondi')
+let donutTimer = document.querySelector('.animationTimer');
+
 
 const countdown = () => {
   if (secondi > 0) {
-    console.log(secondi)
+    numeriSecondi.innerHTML = secondi
     secondi--
     timeoutId = setTimeout(countdown, 1000)
   } else {
-    console.log('tempo scaduto')
     clickRisposta()
   }
 }
 
+
 const resetCountdown = () => {
   clearTimeout(timeoutId)
-  secondi = 5
+  secondi = 60
   countdown()
 
 }
+
+const resetTimerSVG = () => {
+  // Rimuovi e riaggiungi l'elemento SVG per far ripartire l'animazione
+  const parent = donutTimer.parentNode;
+  const nextDonutTimer = donutTimer.cloneNode(true);
+  parent.replaceChild(nextDonutTimer, donutTimer);
+  donutTimer = nextDonutTimer;
+}
+
 
 // Script pagina 1
 
@@ -173,14 +190,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Script pagina 2
 
-let indiceDomandaCorrente = 0
+
 
 const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 
 const creazioneDomanda = () => {
   resetCountdown()
-
-
+  resetTimerSVG()
   const h1 = document.querySelector('#titoloDomandaHtml')
   const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
   h1.innerText = domande[indiceDomandaCorrente].titoloDomanda
@@ -211,7 +227,7 @@ const displayDue = (e) => {
   creazioneDomanda()
 }
 
-let punteggioTotale = 0
+
 
 
 //Click risposta + domanda successiva
@@ -235,6 +251,16 @@ const clickRisposta = (risposta) => {
   }
 }
 
+
+
+/* const scadereTempo = () => {
+  if (secondi === 0) {
+    indiceDomandaCorrente++
+    creazioneDomanda()
+  } else {
+
+  }
+} */
 
 //creazioneDomanda()
 

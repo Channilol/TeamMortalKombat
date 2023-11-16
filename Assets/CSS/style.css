@@ -413,10 +413,31 @@ header img {
 }
 
 .donut-segment2 {
+  stroke: #00ffff;
+}
+
+/* 
+  
+  .donut-segment2 {
   transform-origin: center;
   stroke: #00ffff;
   stroke-dasharray: 0 1000;
   transition: stroke-dasharray 0.5s linear;
-  transform: rotate(-90deg); /* Rotate the circle to start above the number */
-  transform-origin: 50% 50%; /* Set the transform origin to the center */
+  transform: rotate(-90deg); 
+  transform-origin: 50% 50%; 
+  
+  */
+
+.animationTimer {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: fillDonut 60s linear forwards;
+  transform-origin: 50% 50%; /* Imposta il punto di origine della trasformazione */
+  transform: rotate(-90deg);
+}
+
+@keyframes fillDonut {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
