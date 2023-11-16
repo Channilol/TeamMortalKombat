@@ -142,6 +142,62 @@ header img {
   margin: 0;
 }
 
+/* PAGINA DIFFICOLTA */
+#paginaDifficolta {
+    margin: 0 10vw 0 10vw;
+}
+
+#paginaDifficolta h1 {
+    text-align: center;
+    font-size: 3.5em;
+    font-weight: 600;
+}
+
+#paginaDifficolta h2 {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 600;
+    margin: 10vh 0 5vh 0;
+}
+
+#paginaDifficolta div {
+    text-align: center;
+}
+
+#paginaDifficolta button {
+    margin: 10vh 1vw 0 1vw;
+    padding: 1.5vh 5vw 1.5vh 5vw;
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px solid #dcd2e1;
+    color: #dcd2e1;
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.2s ease;
+}
+
+#paginaDifficolta button:hover {
+    background-color: #00ffff;
+    opacity: 0.8;
+    color: black;
+    box-shadow: 0px 0px 25px #525cee;
+    cursor: pointer;
+}
+
+#paginaDifficolta input {
+    padding: 0 0 0 0.5vw;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 8vw;
+    height: 6vh;
+    border: none;
+    border-radius: 5px;
+    color: #dcd2e1;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+}
+
 /* PAGINA 2 - OMAR */
 
 #paginaDomande {
