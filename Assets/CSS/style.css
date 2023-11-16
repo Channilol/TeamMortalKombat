@@ -171,7 +171,6 @@ header img {
 
 #paginaDomande button:hover {
     background: linear-gradient(#c2128d, #850b60);
-/*     background-color: #0a9191; */
     border: 3px solid #df4ab2;
     cursor: pointer;
 }
