@@ -1,9 +1,12 @@
 const paginaWelcome = document.querySelector('#paginaWelcome')
+const paginaDifficolta = document.querySelector('#paginaDifficolta')
 const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
 const paginaFeedback = document.querySelector('#paginaFeedback')
 
-const domande = [
+//DOMANDE EASY
+
+let domande = [
   {
     categoria: "Science: Computers",
     tipo: "multiple",
@@ -113,6 +116,287 @@ const domande = [
   },
 ];
 
+// DOMANDE MEDIE
+
+const domandeMedie = [
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "The computer OEM manufacturer Clevo, known for its Sager notebook line, is based in which country?",
+    rispostaCorretta: "Taiwan",
+    rispostaSbagliata: [
+      "United States",
+      "Germany",
+      "China (People&#039;s Republic of)"
+    ]
+  },
+  {
+    tipo: "boolean",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "Android versions are named in alphabetical order.",
+    rispostaCorretta: "True",
+    rispostaSbagliata: [
+      "False"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "Laserjet and inkjet printers are both examples of what type of printer?",
+    rispostaCorretta: "Non-impact printer",
+    rispostaSbagliata: [
+      "Impact printer",
+      "Daisywheel printer",
+      "Dot matrix printer"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "What is the correct term for the metal object in between the CPU and the CPU fan within a computer system?",
+    rispostaCorretta: "Heat Sink",
+    rispostaSbagliata: [
+      "CPU Vent",
+      "Temperature Decipator",
+      "Heat Vent"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "All of the following programs are classified as raster graphics editors EXCEPT:",
+    rispostaCorretta: "Inkscape",
+    rispostaSbagliata: [
+      "Paint.NET",
+      "GIMP",
+      "Adobe Photoshop"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "What was the first Android version specifically optimized for tablets?",
+    rispostaCorretta: "Honeycomb",
+    rispostaSbagliata: [
+      "Eclair",
+      "Froyo",
+      "Marshmellow"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "Which of these is the name for the failed key escrow device introduced by the National Security Agency in 1993?",
+    rispostaCorretta: "Clipper Chip",
+    rispostaSbagliata: [
+      "Enigma Machine",
+      "Skipjack",
+      "Nautilus"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "Generally, which component of a computer draws the most power?",
+    rispostaCorretta: "Video Card",
+    rispostaSbagliata: [
+      "Hard Drive",
+      "Processor",
+      "Power Supply"
+    ]
+  },
+  {
+    tipo: "boolean",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "To bypass US Munitions Export Laws, the creator of the PGP published all the source code in book form. ",
+    rispostaCorretta: "True",
+    rispostaSbagliata: [
+      "False"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "medium",
+    categoria: "Science: Computers",
+    titoloDomanda: "What does the term MIME stand for, in regards to computing?",
+    rispostaCorretta: "Multipurpose Internet Mail Extensions",
+    rispostaSbagliata: [
+      "Mail Internet Mail Exchange",
+      "Multipurpose Interleave Mail Exchange",
+      "Mail Interleave Method Exchange"
+    ]
+  }
+]
+
+const domandeDifficili = [
+  {
+    tipo: "boolean",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "The T-Mobile Sidekick smartphone is a re-branded version of the Danger Hiptop.",
+    rispostaCorretta: "True",
+    rispostaSbagliata: [
+      "False"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "Who is the founder of Palantir?",
+    rispostaCorretta: "Peter Thiel",
+    rispostaSbagliata: [
+      "Mark Zuckerberg",
+      "Marc Benioff",
+      "Jack Dorsey"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "How many Hz does the video standard PAL support?",
+    rispostaCorretta: "50",
+    rispostaSbagliata: [
+      "59",
+      "60",
+      "25"
+    ]
+  },
+  {
+    tipo: "boolean",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "DHCP stands for Dynamic Host Configuration Port.",
+    rispostaCorretta: "False",
+    rispostaSbagliata: [
+      "True"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "Released in 2001, the first edition of Apple&#039;s Mac OS X operating system (version 10.0) was given what animal code name?",
+    rispostaCorretta: "Cheetah",
+    rispostaSbagliata: [
+      "Puma",
+      "Tiger",
+      "Leopard"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "Which RAID array type is associated with data mirroring?",
+    rispostaCorretta: "RAID 1",
+    rispostaSbagliata: [
+      "RAID 0",
+      "RAID 10",
+      "RAID 5"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "America Online (AOL) started out as which of these online service providers?",
+    rispostaCorretta: "Quantum Link",
+    rispostaSbagliata: [
+      "CompuServe",
+      "Prodigy",
+      "GEnie"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "Which of the following is the oldest of these computers by release date?",
+    rispostaCorretta: "TRS-80",
+    rispostaSbagliata: [
+      "Commodore 64",
+      "ZX Spectrum",
+      "Apple 3"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "What port does HTTP run on?",
+    rispostaCorretta: "80",
+    rispostaSbagliata: [
+      "53",
+      "443",
+      "23"
+    ]
+  },
+  {
+    tipo: "multiple",
+    difficolta: "hard",
+    categoria: "Science: Computers",
+    titoloDomanda: "What internet protocol was documented in RFC 1459?",
+    rispostaCorretta: "IRC",
+    rispostaSbagliata: [
+      "HTTP",
+      "HTTPS",
+      "FTP"
+    ]
+  }
+]
+
+const creaAnswersMedie = () => {
+  for (let i = 0; i < domandeMedie.length; i++) {
+    const risposte = []
+    const rispostaCorretta2 = domandeMedie[i].rispostaCorretta
+    risposte.push(rispostaCorretta2)
+    const rispostaSbagliata2 = domandeMedie[i].rispostaSbagliata
+    for (let j = 0; j < rispostaSbagliata2.length; j++) {
+      const singolaRisposta = rispostaSbagliata2[j]
+      risposte.push(singolaRisposta)
+    }
+    domandeMedie[i].risposte = risposte
+  }
+}
+
+const creaAnswersDifficili = () => {
+  for (let i = 0; i < domandeDifficili.length; i++) {
+    const risposte = []
+    const rispostaCorretta2 = domandeDifficili[i].rispostaCorretta
+    risposte.push(rispostaCorretta2)
+    const rispostaSbagliata2 = domandeDifficili[i].rispostaSbagliata
+    for (let j = 0; j < rispostaSbagliata2.length; j++) {
+      const singolaRisposta = rispostaSbagliata2[j]
+      risposte.push(singolaRisposta)
+    }
+    domandeDifficili[i].risposte = risposte
+  }
+}
+
+creaAnswersMedie()
+
+creaAnswersDifficili()
+
+console.log(domandeDifficili)
+
+
+paginaDifficolta.style.display = 'none'
+paginaDomande.style.display = 'none'
+paginaRisultati.style.display = 'none'
+paginaFeedback.style.display = 'none'
+
+
 const indiceDomande = 0
 
 const indiceRisposte = []
@@ -120,6 +404,8 @@ const indiceRisposte = []
 let indiceDomandaCorrente = 0
 
 let punteggioTotale = 0
+
+let difficolta
 
 // Status iniziale
 
@@ -145,7 +431,6 @@ const resetCountdown = () => {
   clearTimeout(timeoutId)
   secondi = 60
   countdown()
-
 }
 
 const resetTimerSVG = () => {
@@ -156,12 +441,7 @@ const resetTimerSVG = () => {
   donutTimer = nextDonutTimer;
 }
 
-
 // Script pagina 1
-
-paginaDomande.style.display = 'none'
-paginaRisultati.style.display = 'none'
-paginaFeedback.style.display = 'none'
 
 document.addEventListener('DOMContentLoaded', () => {
   const bottoneProceed = document.querySelector('#bottoneProceed')
@@ -182,6 +462,35 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
 })
+
+// Script difficolta
+
+const difficoltaFacile = () => {
+  const bottoneFacile = document.querySelector('#bottoneFacile')
+  bottoneFacile.addEventListener('click', () => {
+    displayTre()
+  })
+}
+
+const difficoltaMedia = () => {
+  const bottoneMedia = document.querySelector('#bottoneMedia')
+  bottoneMedia.addEventListener('click', () => {
+    difficolta = 'medie'
+    displayTre()
+  })
+}
+
+const difficoltaDifficile = () => {
+  const bottoneDifficile = document.querySelector('#bottoneDifficile')
+  bottoneDifficile.addEventListener('click', () => {
+    difficolta = 'difficile'
+    displayTre()
+  })
+}
+
+difficoltaFacile()
+difficoltaMedia()
+difficoltaDifficile()
 
 // Script pagina 2
 
@@ -206,10 +515,20 @@ const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 const creazioneDomanda = () => {
   resetCountdown()
   resetTimerSVG()
+
+  if (difficolta === 'medie') {
+    domande = domandeMedie
+  }
+
+  else if (difficolta === 'difficile') {
+    domande = domandeDifficili
+  }
+
   const h1 = document.querySelector('#titoloDomandaHtml')
   const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
   h1.innerText = domande[indiceDomandaCorrente].titoloDomanda
   numeroDomandaCorrente.innerText = indiceDomandaCorrente + 1
+
   if (domande[indiceDomandaCorrente].tipo === 'multiple') {
     const numeriEstratti = rispostaRandomica()
     for (let i = 0; i < domande[indiceDomandaCorrente].risposte.length; i++) {
@@ -248,8 +567,15 @@ do {
     numeroGenerato = Math.floor(Math.random() * 4);
 } while (arrayNumeriEstratti.includes(numeroGenerato)); */
 
+
+
 const displayDue = (e) => {
   paginaWelcome.style.display = 'none';
+  paginaDifficolta.style.display = 'block';
+}
+
+const displayTre = (e) => {
+  paginaDifficolta.style.display = 'none';
   paginaDomande.style.display = 'block';
   creazioneDomanda()
 }
@@ -257,37 +583,24 @@ const displayDue = (e) => {
 //Click risposta + domanda successiva
 
 const clickRisposta = (risposta) => {
-  const risposteButtons = divRisposte.querySelectorAll('button');
-  let isCorrect = false;
-
-  if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
-    punteggioTotale++;
-    isCorrect = true;
-  }
-
-  risposteButtons.forEach(button => {
-    if (button.textContent === risposta) {
-      button.style.backgroundColor = isCorrect ? 'black' : 'red'; // Apply black color for correct, red for incorrect
+  if (indiceDomandaCorrente < domande.length - 1) {
+    if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+      punteggioTotale++
     }
-    button.disabled = true; // Disable all buttons after an answer is clicked
-  });
-
-  setTimeout(() => {
-    risposteButtons.forEach(button => {
-      button.style.backgroundColor = ''; // Reset button background color
-      button.disabled = false; // Enable buttons for the next question
-    });
-
-    if (indiceDomandaCorrente < domande.length - 1) {
-      indiceDomandaCorrente++;
-      divRisposte.innerHTML = '';
-      creazioneDomanda();
+    indiceDomandaCorrente++
+    divRisposte.innerHTML = ''
+    creazioneDomanda()
+  } else {
+    if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+      punteggioTotale++
     } else {
-      calcoliRisultati();
-      paginaDomande.style.display = 'none';
-      paginaRisultati.style.display = 'block';
+
     }
+    calcoliRisultati()
+    paginaDomande.style.display = 'none'
+    paginaRisultati.style.display = 'block'
   }
+}
 
 /* const scadereTempo = () => {
   if (secondi === 0) {
@@ -303,129 +616,129 @@ const clickRisposta = (risposta) => {
 //Script Pagina 3
 
 const calcoliRisultati = () => {
-    //prendiamo gli elementi html
-    let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
-    let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
-    let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
-    let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
+  //prendiamo gli elementi html
+  let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
+  let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
+  let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
+  let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
 
-    //calcoli percentuali e interi
-    let risposteSbagliate = domande.length - punteggioTotale
-    let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
-    let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
+  //calcoli percentuali e interi
+  let risposteSbagliate = domande.length - punteggioTotale
+  let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
+  let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
 
-    //assegnazione calcoli agli elementi html
-    percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
-    percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
-    numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
-    numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
-    aggiornaGrafico()
-    aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
+  //assegnazione calcoli agli elementi html
+  percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
+  percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
+  numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
+  numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
+  aggiornaGrafico()
+  aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
+}
+
+//Valori GRAFICO
+
+const aggiornaGrafico = () => {
+  const circles = document.querySelector('.donut-segment')
+  const circonferenzaGrafico = 400
+  let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
+  let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
+  let graficoSbagliate = circonferenzaGrafico - graficoCorrette
+  circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
+}
+
+const aggiornaTestoGraficoRisultati = (percentuale) => {
+  const titolo = document.querySelector('.donutGraficoP1')
+  const titoloColorato = document.querySelector('.donutGraficoP2')
+  const p1 = document.querySelector('.donutGraficoP3')
+  const p2 = document.querySelector('.donutGraficoP4')
+
+  if (percentuale < 60) {
+    titolo.innerHTML = "I'm sorry!"
+    titoloColorato.style.fill = '#c2128d'
+    titoloColorato.innerHTML = "You failed the exam"
+    p1.innerHTML = 'You have not'
+    p2.innerHTML = 'passed the exam'
   }
+}
 
-  //Valori GRAFICO
+/* console.log(graficoCorrette)
+console.log(graficoSbagliate)
 
-  const aggiornaGrafico = () => {
-    const circles = document.querySelector('.donut-segment')
-    const circonferenzaGrafico = 400
-    let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
-    let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
-    let graficoSbagliate = circonferenzaGrafico - graficoCorrette
-    circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
-  }
+const donutSegment = document.querySelector('.donut-segment')
 
-  const aggiornaTestoGraficoRisultati = (percentuale) => {
-    const titolo = document.querySelector('.donutGraficoP1')
-    const titoloColorato = document.querySelector('.donutGraficoP2')
-    const p1 = document.querySelector('.donutGraficoP3')
-    const p2 = document.querySelector('.donutGraficoP4')
+donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorrette}`);
+ */
 
-    if (percentuale < 60) {
-      titolo.innerHTML = "I'm sorry!"
-      titoloColorato.style.fill = '#c2128d'
-      titoloColorato.innerHTML = "You failed the exam"
-      p1.innerHTML = 'You have not'
-      p2.innerHTML = 'passed the exam'
-    }
-  }
+//Display pagina feedback
+const bottoneRateUs = document.querySelector('#bottoneRateUs')
 
-  /* console.log(graficoCorrette)
-  console.log(graficoSbagliate)
-  
-  const donutSegment = document.querySelector('.donut-segment')
-  
-  donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorrette}`);
-   */
+const displayQuattro = () => {
+  paginaRisultati.style.display = 'none';
+  paginaFeedback.style.display = 'block';
+}
 
-  //Display pagina feedback
-  const bottoneRateUs = document.querySelector('#bottoneRateUs')
+bottoneRateUs.addEventListener('click', () => displayQuattro())
 
-  const displayQuattro = () => {
-    paginaRisultati.style.display = 'none';
-    paginaFeedback.style.display = 'block';
-  }
+//Script Pagina 4
+const stelle = document.querySelectorAll('.stella')
 
-  bottoneRateUs.addEventListener('click', () => displayQuattro())
-
-  //Script Pagina 4
-  const stelle = document.querySelectorAll('.stella')
-
-  /* stelle.forEach((stella, index) => { //ogni stella dell'array stelle    // TENTATIVO N1
-      stella.addEventListener('mouseover', () => { //assegno ad ogni elemento un eventListener mouseover
-          for (let i = 0; i <= index; i++) { // 
-              const paths = stelle[i].querySelectorAll('path') //paths --> array di oggetti pari
-              paths.forEach((path) => {
-                  path.setAttribute('fill', '#00ffff')
-              })
-          }
-      })
-  })  */
-
-  /* for (let i = 0; i < stelle.length; i++) {            TENTATIVO N2
-      stelle[i].addEventListener('mouseover', () => {
-          for (let j = 0; j <= i; j++) {
-              const paths = stelle[j].querySelectorAll('path')
-              stelle[j].classList.add('stellaIlluminata')
-               for (let k = 0; k < paths.length; k++) {   
-                  paths[k].setAttribute('fill', '')
-              }
-          }
-  
-          for (let k = i + 1; k < stelle.length; k++) {
-              const paths = stelle[k].querySelectorAll('path')
-              stelle[k].classList.remove('stellaIlluminata')
-              for (let z = 0; z < paths.length; z++) {    
-                  paths[z].setAttribute('fill', '')
-              } 
-          }
-      })
-  } */
-
-  /*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
-          for (let j = 0; j <= stelle.length; j++) {
-              const paths = stelle[j].querySelectorAll('path')
-              stelle[j].classList.remove('stellaIlluminata')
-              for (let k = 0; k < paths.length; k++) {
-                  paths[k].setAttribute('fill', '')
-              }
-          }
-      }) */
-
-  for (let i = 0; i < stelle.length; i++) {
-    stelle[i].addEventListener('mouseover', () => {
-      for (let j = 0; j <= i; j++) {
-        const paths = stelle[j].querySelectorAll('path')
-        stelle[j].classList.add('stellaIlluminata')
-      }
-      for (let k = i + 1; k < stelle.length; k++) {
-        const paths = stelle[k].querySelectorAll('path')
-        stelle[k].classList.remove('stellaIlluminata')
-      }
+/* stelle.forEach((stella, index) => { //ogni stella dell'array stelle    // TENTATIVO N1
+    stella.addEventListener('mouseover', () => { //assegno ad ogni elemento un eventListener mouseover
+        for (let i = 0; i <= index; i++) { // 
+            const paths = stelle[i].querySelectorAll('path') //paths --> array di oggetti pari
+            paths.forEach((path) => {
+                path.setAttribute('fill', '#00ffff')
+            })
+        }
     })
-  }
+})  */
 
-  const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
-  bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
+/* for (let i = 0; i < stelle.length; i++) {            TENTATIVO N2
+    stelle[i].addEventListener('mouseover', () => {
+        for (let j = 0; j <= i; j++) {
+            const paths = stelle[j].querySelectorAll('path')
+            stelle[j].classList.add('stellaIlluminata')
+             for (let k = 0; k < paths.length; k++) {   
+                paths[k].setAttribute('fill', '')
+            }
+        }
+
+        for (let k = i + 1; k < stelle.length; k++) {
+            const paths = stelle[k].querySelectorAll('path')
+            stelle[k].classList.remove('stellaIlluminata')
+            for (let z = 0; z < paths.length; z++) {    
+                paths[z].setAttribute('fill', '')
+            } 
+        }
+    })
+} */
+
+/*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
+        for (let j = 0; j <= stelle.length; j++) {
+            const paths = stelle[j].querySelectorAll('path')
+            stelle[j].classList.remove('stellaIlluminata')
+            for (let k = 0; k < paths.length; k++) {
+                paths[k].setAttribute('fill', '')
+            }
+        }
+    }) */
+
+for (let i = 0; i < stelle.length; i++) {
+  stelle[i].addEventListener('mouseover', () => {
+    for (let j = 0; j <= i; j++) {
+      const paths = stelle[j].querySelectorAll('path')
+      stelle[j].classList.add('stellaIlluminata')
+    }
+    for (let k = i + 1; k < stelle.length; k++) {
+      const paths = stelle[k].querySelectorAll('path')
+      stelle[k].classList.remove('stellaIlluminata')
+    }
+  })
+}
+
+const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
+bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
 
 /* do {
     numeroGenerato = Math.floor(Math.random() * 76) + 1;
