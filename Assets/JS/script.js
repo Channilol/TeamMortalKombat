@@ -126,7 +126,7 @@ let punteggioTotale = 0
 
 // TIMER
 
-let secondi = 60
+let secondi = 5
 let timeoutId
 
 let numeriSecondi = document.querySelector('.testoSecondi')
@@ -146,7 +146,7 @@ const countdown = () => {
 
 const resetCountdown = () => {
   clearTimeout(timeoutId)
-  secondi = 60
+  secondi = 5
   countdown()
 
 }
