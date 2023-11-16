@@ -265,7 +265,7 @@ let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
 let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
 
 let risposteSbagliate = domande.length - punteggioTotale
-let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
+let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
 let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
 
 percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
