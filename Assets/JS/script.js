@@ -126,7 +126,7 @@ let punteggioTotale = 0
 
 // TIMER
 
-let secondi = 5
+let secondi = 60
 let timeoutId
 
 let numeriSecondi = document.querySelector('.testoSecondi')
@@ -146,7 +146,7 @@ const countdown = () => {
 
 const resetCountdown = () => {
   clearTimeout(timeoutId)
-  secondi = 5
+  secondi = 60
   countdown()
 
 }
@@ -233,24 +233,38 @@ const displayDue = (e) => {
 //Click risposta + domanda successiva
 
 const clickRisposta = (risposta) => {
-  if (indiceDomandaCorrente < domande.length - 1) {
-    if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
-      punteggioTotale++
-    }
-    indiceDomandaCorrente++
-    divRisposte.innerHTML = ''
-    creazioneDomanda()
-  } else {
-    if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
-      punteggioTotale++
-    } else {
+  const risposteButtons = divRisposte.querySelectorAll('button');
+  let isCorrect = false;
 
-    }
-    calcoliRisultati()
-    paginaDomande.style.display = 'none'
-    paginaRisultati.style.display = 'block'
+  if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+    punteggioTotale++;
+    isCorrect = true;
   }
-}
+
+  risposteButtons.forEach(button => {
+    if (button.textContent === risposta) {
+      button.style.backgroundColor = isCorrect ? 'black' : 'red'; // Apply black color for correct, red for incorrect
+    }
+    button.disabled = true; // Disable all buttons after an answer is clicked
+  });
+
+  setTimeout(() => {
+    risposteButtons.forEach(button => {
+      button.style.backgroundColor = ''; // Reset button background color
+      button.disabled = false; // Enable buttons for the next question
+    });
+
+    if (indiceDomandaCorrente < domande.length - 1) {
+      indiceDomandaCorrente++;
+      divRisposte.innerHTML = '';
+      creazioneDomanda();
+    } else {
+      calcoliRisultati();
+      paginaDomande.style.display = 'none';
+      paginaRisultati.style.display = 'block';
+    }
+  }, 1000); // Adjust the delay time as needed (in milliseconds)
+};
 
 
 
