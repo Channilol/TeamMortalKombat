@@ -121,7 +121,6 @@ const domande = [
 
   let punteggioTotale = 0
 
-
 // Status iniziale
 
 // TIMER
@@ -132,7 +131,6 @@ let timeoutId
 let numeriSecondi = document.querySelector('.testoSecondi')
 let donutTimer = document.querySelector('.animationTimer');
 
-
 const countdown = () => {
     if (secondi > 0) {
         numeriSecondi.innerHTML = secondi
@@ -142,7 +140,6 @@ const countdown = () => {
       clickRisposta()
     }
 }
-
 
 const resetCountdown = () => {
   clearTimeout(timeoutId)
@@ -184,13 +181,25 @@ document.addEventListener('DOMContentLoaded', () => {
     
 })
 
-
-
 // Script pagina 2
 
+// Funzione generazione numeri random 0-3
 
+const rispostaRandomica = () => {
+  arrayNumeriEstratti = []
+  while (arrayNumeriEstratti.length < domande[indiceDomandaCorrente].risposte.length) {
+    numeroGenerato = Math.floor(Math.random() * domande[indiceDomandaCorrente].risposte.length);
+
+    if (!arrayNumeriEstratti.includes(numeroGenerato)) {
+        arrayNumeriEstratti.push(numeroGenerato);
+    }
+  }
+  return arrayNumeriEstratti
+}
 
 const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
+
+//
 
 const creazioneDomanda = () => {
     resetCountdown()
@@ -199,11 +208,11 @@ const creazioneDomanda = () => {
     const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
     h1.innerText = domande[indiceDomandaCorrente].titoloDomanda
     numeroDomandaCorrente.innerText = indiceDomandaCorrente + 1
-
         if (domande[indiceDomandaCorrente].tipo === 'multiple') {
-            for (let i = 0; i < domande[indiceDomandaCorrente].risposte.length; i++) {
+          const numeriEstratti = rispostaRandomica() 
+          for (let i = 0; i < domande[indiceDomandaCorrente].risposte.length; i++) {
                 const risposta = document.createElement('button')
-                const testoRisposta = domande[indiceDomandaCorrente].risposte[i]
+                const testoRisposta = domande[indiceDomandaCorrente].risposte[numeriEstratti[i]]
                 risposta.textContent = testoRisposta
                 if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
                   risposta.classList.add('bottoneRispostaCorretta')
@@ -213,10 +222,12 @@ const creazioneDomanda = () => {
                 divRisposte.appendChild(risposta)
                 risposta.addEventListener('click', () => clickRisposta(testoRisposta))
             }
+          
         } else {
+          const numeriEstratti = rispostaRandomica() 
             for (let j = 0; j < domande[indiceDomandaCorrente].risposte.length; j++) {
                 const risposta = document.createElement('button')
-                const testoRisposta = domande[indiceDomandaCorrente].risposte[j]
+                const testoRisposta = domande[indiceDomandaCorrente].risposte[numeriEstratti[j]]
                 risposta.textContent = testoRisposta
                 if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
                   risposta.classList.add('bottoneRispostaCorretta')
@@ -229,14 +240,17 @@ const creazioneDomanda = () => {
     }
 }
 
+/* 
+arrayNumeriEstratti = []
+do {
+    numeroGenerato = Math.floor(Math.random() * 4);
+} while (arrayNumeriEstratti.includes(numeroGenerato)); */
+
 const displayDue = (e) => {
   paginaWelcome.style.display = 'none';
   paginaDomande.style.display = 'block';
   creazioneDomanda()
 }
-
-
-
 
 //Click risposta + domanda successiva
 
@@ -259,8 +273,6 @@ const clickRisposta = (risposta) => {
     paginaRisultati.style.display = 'block'
     }
 }
-
-
 
 /* const scadereTempo = () => {
   if (secondi === 0) {
@@ -304,10 +316,6 @@ const aggiornaGrafico = () => {
     let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
     let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
     let graficoSbagliate = circonferenzaGrafico - graficoCorrette
-
-    console.log(graficoCorrette)
-    console.log(graficoSbagliate)
-
     circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
 }
 
