@@ -1,9 +1,12 @@
 const paginaWelcome = document.querySelector('#paginaWelcome')
+const paginaDifficolta = document.querySelector('#paginaDifficolta')
 const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
 const paginaFeedback = document.querySelector('#paginaFeedback')
 
-const domande = [
+//DOMANDE EASY
+
+let domande = [
     {
       categoria: "Science: Computers",
       tipo: "multiple",
@@ -113,6 +116,287 @@ const domande = [
     },
   ];
 
+// DOMANDE MEDIE
+
+const domandeMedie = [
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "The computer OEM manufacturer Clevo, known for its Sager notebook line, is based in which country?",
+        rispostaCorretta: "Taiwan",
+        rispostaSbagliata: [
+          "United States",
+          "Germany",
+          "China (People&#039;s Republic of)"
+        ]
+      },
+      {
+        tipo: "boolean",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "Android versions are named in alphabetical order.",
+        rispostaCorretta: "True",
+        rispostaSbagliata: [
+          "False"
+        ]
+      },
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "Laserjet and inkjet printers are both examples of what type of printer?",
+        rispostaCorretta: "Non-impact printer",
+        rispostaSbagliata: [
+          "Impact printer",
+          "Daisywheel printer",
+          "Dot matrix printer"
+        ]
+      },
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "What is the correct term for the metal object in between the CPU and the CPU fan within a computer system?",
+        rispostaCorretta: "Heat Sink",
+        rispostaSbagliata: [
+          "CPU Vent",
+          "Temperature Decipator",
+          "Heat Vent"
+        ]
+      },
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "All of the following programs are classified as raster graphics editors EXCEPT:",
+        rispostaCorretta: "Inkscape",
+        rispostaSbagliata: [
+          "Paint.NET",
+          "GIMP",
+          "Adobe Photoshop"
+        ]
+      },
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "What was the first Android version specifically optimized for tablets?",
+        rispostaCorretta: "Honeycomb",
+        rispostaSbagliata: [
+          "Eclair",
+          "Froyo",
+          "Marshmellow"
+        ]
+      },
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "Which of these is the name for the failed key escrow device introduced by the National Security Agency in 1993?",
+        rispostaCorretta: "Clipper Chip",
+        rispostaSbagliata: [
+          "Enigma Machine",
+          "Skipjack",
+          "Nautilus"
+        ]
+      },
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "Generally, which component of a computer draws the most power?",
+        rispostaCorretta: "Video Card",
+        rispostaSbagliata: [
+          "Hard Drive",
+          "Processor",
+          "Power Supply"
+        ]
+      },
+      {
+        tipo: "boolean",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "To bypass US Munitions Export Laws, the creator of the PGP published all the source code in book form. ",
+        rispostaCorretta: "True",
+        rispostaSbagliata: [
+          "False"
+        ]
+      },
+      {
+        tipo: "multiple",
+        difficolta: "medium",
+        categoria: "Science: Computers",
+        titoloDomanda: "What does the term MIME stand for, in regards to computing?",
+        rispostaCorretta: "Multipurpose Internet Mail Extensions",
+        rispostaSbagliata: [
+          "Mail Internet Mail Exchange",
+          "Multipurpose Interleave Mail Exchange",
+          "Mail Interleave Method Exchange"
+        ]
+      }
+    ]
+  
+  const domandeDifficili = [
+        {
+          tipo: "boolean",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "The T-Mobile Sidekick smartphone is a re-branded version of the Danger Hiptop.",
+          rispostaCorretta: "True",
+          rispostaSbagliata: [
+            "False"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "Who is the founder of Palantir?",
+          rispostaCorretta: "Peter Thiel",
+          rispostaSbagliata: [
+            "Mark Zuckerberg",
+            "Marc Benioff",
+            "Jack Dorsey"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "How many Hz does the video standard PAL support?",
+          rispostaCorretta: "50",
+          rispostaSbagliata: [
+            "59",
+            "60",
+            "25"
+          ]
+        },
+        {
+          tipo: "boolean",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "DHCP stands for Dynamic Host Configuration Port.",
+          rispostaCorretta: "False",
+          rispostaSbagliata: [
+            "True"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "Released in 2001, the first edition of Apple&#039;s Mac OS X operating system (version 10.0) was given what animal code name?",
+          rispostaCorretta: "Cheetah",
+          rispostaSbagliata: [
+            "Puma",
+            "Tiger",
+            "Leopard"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "Which RAID array type is associated with data mirroring?",
+          rispostaCorretta: "RAID 1",
+          rispostaSbagliata: [
+            "RAID 0",
+            "RAID 10",
+            "RAID 5"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "America Online (AOL) started out as which of these online service providers?",
+          rispostaCorretta: "Quantum Link",
+          rispostaSbagliata: [
+            "CompuServe",
+            "Prodigy",
+            "GEnie"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "Which of the following is the oldest of these computers by release date?",
+          rispostaCorretta: "TRS-80",
+          rispostaSbagliata: [
+            "Commodore 64",
+            "ZX Spectrum",
+            "Apple 3"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "What port does HTTP run on?",
+          rispostaCorretta: "80",
+          rispostaSbagliata: [
+            "53",
+            "443",
+            "23"
+          ]
+        },
+        {
+          tipo: "multiple",
+          difficolta: "hard",
+          categoria: "Science: Computers",
+          titoloDomanda: "What internet protocol was documented in RFC 1459?",
+          rispostaCorretta: "IRC",
+          rispostaSbagliata: [
+            "HTTP",
+            "HTTPS",
+            "FTP"
+          ]
+        }
+      ]
+
+    const creaAnswersMedie = () => {
+      for (let i = 0; i < domandeMedie.length; i++) {
+          const risposte = []
+          const rispostaCorretta2 = domandeMedie[i].rispostaCorretta
+          risposte.push(rispostaCorretta2)
+          const rispostaSbagliata2 = domandeMedie[i].rispostaSbagliata
+          for (let j = 0; j < rispostaSbagliata2.length; j++) {
+              const singolaRisposta = rispostaSbagliata2[j]
+              risposte.push(singolaRisposta)
+          }
+        domandeMedie[i].risposte = risposte
+      }
+  }
+
+  const creaAnswersDifficili = () => {
+    for (let i = 0; i < domandeDifficili.length; i++) {
+        const risposte = []
+        const rispostaCorretta2 = domandeDifficili[i].rispostaCorretta
+        risposte.push(rispostaCorretta2)
+        const rispostaSbagliata2 = domandeDifficili[i].rispostaSbagliata
+        for (let j = 0; j < rispostaSbagliata2.length; j++) {
+            const singolaRisposta = rispostaSbagliata2[j]
+            risposte.push(singolaRisposta)
+        }
+      domandeDifficili[i].risposte = risposte
+    }
+  }
+
+  creaAnswersMedie()
+
+  creaAnswersDifficili()
+
+  console.log(domandeDifficili)
+  
+
+  paginaDifficolta.style.display = 'none'
+  paginaDomande.style.display = 'none'
+  paginaRisultati.style.display = 'none'
+  paginaFeedback.style.display = 'none'
+
+
   const indiceDomande = 0
 
   const indiceRisposte = []
@@ -120,6 +404,8 @@ const domande = [
   let indiceDomandaCorrente = 0
 
   let punteggioTotale = 0
+
+  let difficolta
 
 // Status iniziale
 
@@ -157,10 +443,6 @@ const resetTimerSVG = () => {
 
 // Script pagina 1
 
-paginaDomande.style.display = 'none'
-paginaRisultati.style.display = 'none'
-paginaFeedback.style.display = 'none'
-
 document.addEventListener('DOMContentLoaded', () => {
     const bottoneProceed = document.querySelector('#bottoneProceed')
     const checkBoxObbligatoria = document.querySelector('#checkBoxObbligatoria')
@@ -180,6 +462,35 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     
 })
+
+// Script difficolta
+
+const difficoltaFacile = () => {
+  const bottoneFacile = document.querySelector('#bottoneFacile')
+  bottoneFacile.addEventListener('click', () =>{
+    displayTre()
+  })
+}
+
+const difficoltaMedia = () => {
+  const bottoneMedia = document.querySelector('#bottoneMedia')
+  bottoneMedia.addEventListener('click', () => {
+    difficolta = 'medie'
+    displayTre()
+  })
+}
+
+const difficoltaDifficile = () => {
+  const bottoneDifficile = document.querySelector('#bottoneDifficile')
+  bottoneDifficile.addEventListener('click', () => {
+    difficolta = 'difficile'
+    displayTre()
+  })
+}
+
+difficoltaFacile()
+difficoltaMedia()
+difficoltaDifficile()
 
 // Script pagina 2
 
@@ -204,10 +515,20 @@ const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 const creazioneDomanda = () => {
     resetCountdown()
     resetTimerSVG()
+    
+    if (difficolta === 'medie') {
+      domande = domandeMedie
+    }
+
+    else if (difficolta === 'difficile') {
+      domande = domandeDifficili
+    }
+
     const h1 = document.querySelector('#titoloDomandaHtml')
     const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
     h1.innerText = domande[indiceDomandaCorrente].titoloDomanda
     numeroDomandaCorrente.innerText = indiceDomandaCorrente + 1
+
         if (domande[indiceDomandaCorrente].tipo === 'multiple') {
           const numeriEstratti = rispostaRandomica() 
           for (let i = 0; i < domande[indiceDomandaCorrente].risposte.length; i++) {
@@ -246,8 +567,15 @@ do {
     numeroGenerato = Math.floor(Math.random() * 4);
 } while (arrayNumeriEstratti.includes(numeroGenerato)); */
 
+
+
 const displayDue = (e) => {
   paginaWelcome.style.display = 'none';
+  paginaDifficolta.style.display = 'block';
+}
+
+const displayTre = (e) => {
+  paginaDifficolta.style.display = 'none';
   paginaDomande.style.display = 'block';
   creazioneDomanda()
 }
