@@ -230,11 +230,10 @@ const displayDue = (e) => {
 
 //Click risposta + domanda successiva
 
-const clickRisposta = (risposta) => {                                                                   
+const clickRisposta = (risposta) => {                                                         
     if (indiceDomandaCorrente < domande.length - 1) {
         if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
             punteggioTotale++
-        } else {
         }
     indiceDomandaCorrente++
     divRisposte.innerHTML = ''
@@ -242,6 +241,8 @@ const clickRisposta = (risposta) => {
     } else {
         if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
         punteggioTotale++
+        } else {
+
         }
     calcoliRisultati()
     paginaDomande.style.display = 'none'
@@ -282,6 +283,7 @@ percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%
 numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
 numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
 aggiornaGrafico()
+aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
 }
 
 //Valori GRAFICO
@@ -299,7 +301,20 @@ const aggiornaGrafico = () => {
     circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
 }
 
+const aggiornaTestoGraficoRisultati = (percentuale) => {
+  const titolo = document.querySelector('.donutGraficoP1')
+  const titoloColorato = document.querySelector('.donutGraficoP2')
+  const p1 = document.querySelector('.donutGraficoP3')
+  const p2 = document.querySelector('.donutGraficoP4')
 
+  if (percentuale < 60) {
+    titolo.innerHTML = "I'm sorry!"
+    titoloColorato.style.fill = '#c2128d'
+    titoloColorato.innerHTML = "You failed the exam"
+    p1.innerHTML = 'You have not'
+    p2.innerHTML = 'passed the exam'
+  }
+}
 
 /* console.log(graficoCorrette)
 console.log(graficoSbagliate)
@@ -375,6 +390,9 @@ for (let i = 0; i < stelle.length; i++) {
         }
     })
 }
+
+const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
+bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
 
 /* do {
     numeroGenerato = Math.floor(Math.random() * 76) + 1;
