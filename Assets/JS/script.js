@@ -205,6 +205,11 @@ const creazioneDomanda = () => {
                 const risposta = document.createElement('button')
                 const testoRisposta = domande[indiceDomandaCorrente].risposte[i]
                 risposta.textContent = testoRisposta
+                if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+                  risposta.classList.add('bottoneRispostaCorretta')
+                } else {
+                  risposta.classList.add('bottoneRispostaSbagliata')
+                }
                 divRisposte.appendChild(risposta)
                 risposta.addEventListener('click', () => clickRisposta(testoRisposta))
             }
@@ -213,6 +218,11 @@ const creazioneDomanda = () => {
                 const risposta = document.createElement('button')
                 const testoRisposta = domande[indiceDomandaCorrente].risposte[j]
                 risposta.textContent = testoRisposta
+                if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+                  risposta.classList.add('bottoneRispostaCorretta')
+                } else {
+                  risposta.classList.add('bottoneRispostaSbagliata')
+                }
                 divRisposte.appendChild(risposta)
                 risposta.addEventListener('click', () => clickRisposta(testoRisposta))
         }
