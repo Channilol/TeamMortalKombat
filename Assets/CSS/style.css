@@ -422,6 +422,19 @@ header img {
   }
   
 .donut-segment2 {
-    transform-origin: center;
     stroke: #00ffff;
+  }
+
+.animationTimer {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: fillDonut 60s linear forwards;
+    transform-origin: 50% 50%; /* Imposta il punto di origine della trasformazione */
+    transform: rotate(-90deg);
+}
+
+    @keyframes fillDonut {
+    to {
+      stroke-dashoffset: 0;
+    }
   }
