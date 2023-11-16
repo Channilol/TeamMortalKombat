@@ -121,17 +121,11 @@ const domande = [
 
   let punteggioTotale = 0
 
-
-// Status iniziale
-
-// TIMER
-
 let secondi = 60
 let timeoutId
 
 let numeriSecondi = document.querySelector('.testoSecondi')
 let donutTimer = document.querySelector('.animationTimer');
-
 
 const countdown = () => {
     if (secondi > 0) {
@@ -143,7 +137,6 @@ const countdown = () => {
     }
 }
 
-
 const resetCountdown = () => {
   clearTimeout(timeoutId)
   secondi = 60
@@ -151,7 +144,6 @@ const resetCountdown = () => {
 }
 
 const resetTimerSVG = () => {
-  // Rimuovi e riaggiungi l'elemento SVG per far ripartire l'animazione
   const parent = donutTimer.parentNode;
   const nextDonutTimer = donutTimer.cloneNode(true);
   parent.replaceChild(nextDonutTimer, donutTimer);
@@ -184,11 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 })
 
-
-
 // Script pagina 2
-
-
 
 const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 
@@ -225,11 +213,6 @@ const displayDue = (e) => {
   creazioneDomanda()
 }
 
-
-
-
-//Click risposta + domanda successiva
-
 const clickRisposta = (risposta) => {                                                         
     if (indiceDomandaCorrente < domande.length - 1) {
         if (risposta === domande[indiceDomandaCorrente].rispostaCorretta) {
@@ -250,34 +233,18 @@ const clickRisposta = (risposta) => {
     }
 }
 
-
-
-/* const scadereTempo = () => {
-  if (secondi === 0) {
-    indiceDomandaCorrente++
-    creazioneDomanda()
-  } else {
-
-  }
-} */
-
-//creazioneDomanda()
-
 //Script Pagina 3
 
 const calcoliRisultati = () => {
-//prendiamo gli elementi html
 let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
 let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
 let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
 let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
-
-//calcoli percentuali e interi
+    
 let risposteSbagliate = domande.length - punteggioTotale
-let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
+let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
 let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
 
-//assegnazione calcoli agli elementi html
 percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
 percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
 numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
@@ -285,8 +252,6 @@ numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
 aggiornaGrafico()
 aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
 }
-
-//Valori GRAFICO
 
 const aggiornaGrafico = () => {
     const circles = document.querySelector('.donut-segment')
@@ -316,15 +281,6 @@ const aggiornaTestoGraficoRisultati = (percentuale) => {
   }
 }
 
-/* console.log(graficoCorrette)
-console.log(graficoSbagliate)
-
-const donutSegment = document.querySelector('.donut-segment')
-
-donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorrette}`);
- */
-
-//Display pagina feedback
 const bottoneRateUs = document.querySelector('#bottoneRateUs')
 
 const displayQuattro = () => {
@@ -335,48 +291,8 @@ const displayQuattro = () => {
 bottoneRateUs.addEventListener('click', () => displayQuattro())
 
 //Script Pagina 4
+
 const stelle = document.querySelectorAll('.stella')
-
-/* stelle.forEach((stella, index) => { //ogni stella dell'array stelle    // TENTATIVO N1
-    stella.addEventListener('mouseover', () => { //assegno ad ogni elemento un eventListener mouseover
-        for (let i = 0; i <= index; i++) { // 
-            const paths = stelle[i].querySelectorAll('path') //paths --> array di oggetti pari
-            paths.forEach((path) => {
-                path.setAttribute('fill', '#00ffff')
-            })
-        }
-    })
-})  */
-
-/* for (let i = 0; i < stelle.length; i++) {            TENTATIVO N2
-    stelle[i].addEventListener('mouseover', () => {
-        for (let j = 0; j <= i; j++) {
-            const paths = stelle[j].querySelectorAll('path')
-            stelle[j].classList.add('stellaIlluminata')
-             for (let k = 0; k < paths.length; k++) {   
-                paths[k].setAttribute('fill', '')
-            }
-        }
-
-        for (let k = i + 1; k < stelle.length; k++) {
-            const paths = stelle[k].querySelectorAll('path')
-            stelle[k].classList.remove('stellaIlluminata')
-            for (let z = 0; z < paths.length; z++) {    
-                paths[z].setAttribute('fill', '')
-            } 
-        }
-    })
-} */
-
-/*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
-        for (let j = 0; j <= stelle.length; j++) {
-            const paths = stelle[j].querySelectorAll('path')
-            stelle[j].classList.remove('stellaIlluminata')
-            for (let k = 0; k < paths.length; k++) {
-                paths[k].setAttribute('fill', '')
-            }
-        }
-    }) */
 
 for (let i = 0; i < stelle.length; i++) {
     stelle[i].addEventListener('mouseover', () => {
@@ -393,7 +309,3 @@ for (let i = 0; i < stelle.length; i++) {
 
 const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
 bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
-
-/* do {
-    numeroGenerato = Math.floor(Math.random() * 76) + 1;
-} while (arrayNumeriEstratti.includes(numeroGenerato)); */
