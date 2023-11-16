@@ -150,8 +150,6 @@ const resetTimerSVG = () => {
   donutTimer = nextDonutTimer;
 }
 
-// Script pagina 1
-
 paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'none'
 paginaFeedback.style.display = 'none'
@@ -178,6 +176,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Script pagina 2
 
+const rispostaRandomica = () => {
+  arrayNumeriEstratti = []
+  while (arrayNumeriEstratti.length < domande[indiceDomandaCorrente].risposte.length) {
+    numeroGenerato = Math.floor(Math.random() * domande[indiceDomandaCorrente].risposte.length);
+
+    if (!arrayNumeriEstratti.includes(numeroGenerato)) {
+        arrayNumeriEstratti.push(numeroGenerato);
+    }
+  }
+  return arrayNumeriEstratti
+}
+
 const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 
 const creazioneDomanda = () => {
@@ -187,20 +197,32 @@ const creazioneDomanda = () => {
     const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
     h1.innerText = domande[indiceDomandaCorrente].titoloDomanda
     numeroDomandaCorrente.innerText = indiceDomandaCorrente + 1
-
         if (domande[indiceDomandaCorrente].tipo === 'multiple') {
-            for (let i = 0; i < domande[indiceDomandaCorrente].risposte.length; i++) {
+          const numeriEstratti = rispostaRandomica() 
+          for (let i = 0; i < domande[indiceDomandaCorrente].risposte.length; i++) {
                 const risposta = document.createElement('button')
-                const testoRisposta = domande[indiceDomandaCorrente].risposte[i]
+                const testoRisposta = domande[indiceDomandaCorrente].risposte[numeriEstratti[i]]
                 risposta.textContent = testoRisposta
+                if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+                  risposta.classList.add('bottoneRispostaCorretta')
+                } else {
+                  risposta.classList.add('bottoneRispostaSbagliata')
+                }
                 divRisposte.appendChild(risposta)
                 risposta.addEventListener('click', () => clickRisposta(testoRisposta))
             }
+          
         } else {
+          const numeriEstratti = rispostaRandomica() 
             for (let j = 0; j < domande[indiceDomandaCorrente].risposte.length; j++) {
                 const risposta = document.createElement('button')
-                const testoRisposta = domande[indiceDomandaCorrente].risposte[j]
+                const testoRisposta = domande[indiceDomandaCorrente].risposte[numeriEstratti[j]]
                 risposta.textContent = testoRisposta
+                if (testoRisposta === domande[indiceDomandaCorrente].rispostaCorretta) {
+                  risposta.classList.add('bottoneRispostaCorretta')
+                } else {
+                  risposta.classList.add('bottoneRispostaSbagliata')
+                }
                 divRisposte.appendChild(risposta)
                 risposta.addEventListener('click', () => clickRisposta(testoRisposta))
         }
@@ -212,6 +234,7 @@ const displayDue = (e) => {
   paginaDomande.style.display = 'block';
   creazioneDomanda()
 }
+
 
 const clickRisposta = (risposta) => {                                                         
     if (indiceDomandaCorrente < domande.length - 1) {
@@ -240,7 +263,7 @@ let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
 let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
 let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
 let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
-    
+
 let risposteSbagliate = domande.length - punteggioTotale
 let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
 let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
@@ -259,10 +282,6 @@ const aggiornaGrafico = () => {
     let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
     let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
     let graficoSbagliate = circonferenzaGrafico - graficoCorrette
-
-    console.log(graficoCorrette)
-    console.log(graficoSbagliate)
-
     circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
 }
 
