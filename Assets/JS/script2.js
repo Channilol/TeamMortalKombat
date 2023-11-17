@@ -275,6 +275,12 @@ const numeroDomandeScelto = () => {
     const inputNumero = document.querySelector('#numeroDomandeScelte')
     inputNumero.addEventListener('input', () => {
         numeroDomande = parseInt(inputNumero.value, 10)
+        if (isNaN(numeroDomande) || numeroDomande < 1) {
+          numeroDomande = 1;
+        } else if (numeroDomande > 51) {
+          numeroDomande = 50;
+        }
+        inputNumero.value = numeroDomande;
     })
 
 }
