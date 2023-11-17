@@ -3,20 +3,27 @@
 // stato iniziale
 
 const paginaWelcome = document.querySelector('#paginaWelcome')
+const divflaggaLaCheckbox = document.querySelector('#divflaggaLaCheckbox')
 const paginaDifficolta = document.querySelector('#paginaDifficolta')
 const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
 const paginaFeedback = document.querySelector('#paginaFeedback')
+const titoloFeedback = document.querySelector('#titoloFeedback')
+const esitoFeedback = document.querySelector('#esitoFeedback')
+const stellePiuFeedback = document.querySelector('#stellePiuFeedback')
 
-
+divflaggaLaCheckbox.style.display = 'none'
 paginaDifficolta.style.display = 'none'
 paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'none'
 paginaFeedback.style.display = 'none'
+titoloFeedback.style.display = 'none'
+esitoFeedback.style.display = 'none'
+stellePiuFeedback.style.display = 'none'
 
 // gestione timer
 
-let secondi = 5
+let secondi = 60
 let timeoutId
 
 let numeriSecondi = document.querySelector('.testoSecondi')
@@ -48,7 +55,7 @@ const countdown = (domande) => {
 const resetCountdown = (domande) => {
 
     clearTimeout(timeoutId)
-    secondi = 5
+    secondi = 60
     countdown(domande)
 }
 
@@ -61,7 +68,7 @@ const resetTimerSVG = () => {
 }
 
 ///////
-let domande = ['hello'] // variabile globale
+let domande = [] // variabile globale
 
 let difficulty
 
@@ -140,7 +147,11 @@ const creazioneDomanda = (domandePrese) => {
             const risposta = document.createElement('button')
             const testoRisposta = newRisposteMultiple[i]
             risposta.textContent = testoRisposta
-
+            if (testoRisposta === domandePrese[indiceDomandaCorrente].correct_answer) {
+                risposta.classList.add('bottoneRispostaCorretta')
+              } else {
+                risposta.classList.add('bottoneRispostaSbagliata')
+              }
             divRisposte.appendChild(risposta)
             risposta.addEventListener('click', () => { clickRisposta(testoRisposta, domandePrese) })
         }
@@ -159,7 +170,11 @@ const creazioneDomanda = (domandePrese) => {
             const risposta = document.createElement('button')
             const testoRisposta = newRisposteBool[i]
             risposta.textContent = testoRisposta
-
+            if (testoRisposta === domandePrese[indiceDomandaCorrente].correct_answer) {
+                risposta.classList.add('bottoneRispostaCorretta')
+              } else {
+                risposta.classList.add('bottoneRispostaSbagliata')
+              }
             divRisposte.appendChild(risposta)
             risposta.addEventListener('click', () => { clickRisposta(testoRisposta, domandePrese) })
         }
@@ -208,6 +223,7 @@ const clickRisposta = (risposta, domande) => {
         }
 
         console.log('Domande finite');
+        clearTimeout(timeoutId)
         calcoloRisultati();
         paginaDomande.style.display = 'none';
         paginaRisultati.style.display = 'block';
@@ -219,22 +235,30 @@ const clickRisposta = (risposta, domande) => {
 document.addEventListener('DOMContentLoaded', () => {
     const bottoneProceed = document.querySelector('#bottoneProceed')
     const checkBoxObbligatoria = document.querySelector('#checkBoxObbligatoria')
-
+    const flaggaLaCheckbox = document.querySelector('#flaggaLaCheckbox')
+  
     checkBoxObbligatoria.addEventListener('change', () => {
-        bottoneProceed.disabled = !checkBoxObbligatoria.checked
+      bottoneProceed.disabled = !checkBoxObbligatoria.checked
+      if (!checkBoxObbligatoria.checked) {
+        divflaggaLaCheckbox.style.display = 'block'
+        flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the exam!'
+      } else {
+        divflaggaLaCheckbox.style.display = 'none'
+      }
     })
-
+  
     bottoneProceed.addEventListener('click', (event) => {
-        if (checkBoxObbligatoria.checked) {
-            displayDue()
-            event.preventDefault();
-        }
-        else {
-            alert('Before proceeding to the test check all boxes')
-        }
+      if (checkBoxObbligatoria.checked) {
+        displayDue()
+        event.preventDefault();
+      }
+      else {
+        divflaggaLaCheckbox.style.display = 'block'
+        flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the exam!'
+      }
     })
-
-})
+  
+  })
 
 const displayDue = (e) => {
     paginaWelcome.style.display = 'none';
@@ -334,18 +358,81 @@ bottoneRateUs.addEventListener('click', () => displayQuattro())
 
 const stelle = document.querySelectorAll('.stella')
 
+let mouseoverAbilitato = true;
+
+const gestoreMouseover = (indice) => () => {
+  if (mouseoverAbilitato) {
+    for (let j = 0; j <= indice; j++) {
+      const paths = stelle[j].querySelectorAll('path');
+      stelle[j].classList.add('stellaIlluminata');
+    }
+    for (let k = indice + 1; k < stelle.length; k++) {
+      const paths = stelle[k].querySelectorAll('path');
+      stelle[k].classList.remove('stellaIlluminata');
+    }
+  }
+};
+
+const gestoreClick = (indice) => () => {
+  for (let j = 0; j <= indice; j++) {
+    const paths = stelle[j].querySelectorAll('path');
+    stelle[j].classList.add('stellaIlluminata');
+  }
+
+  // Rimuovi la classe 'stellaIlluminata' dalle stelle successive
+  for (let k = indice + 1; k < stelle.length; k++) {
+    stelle[k].classList.remove('stellaIlluminata');
+  }
+
+  // Disabilita il mouseover dopo il click
+  mouseoverAbilitato = false;
+
+  // Rimuovi gli eventi mouseover dopo il click
+  for (let i = 0; i < stelle.length; i++) {
+    stelle[i].removeEventListener('mouseover', gestoreMouseover(i));
+  }
+};
+
+// Aggiungi gli eventi mouseover e click alle stelle
 for (let i = 0; i < stelle.length; i++) {
-    stelle[i].addEventListener('mouseover', () => {
-        for (let j = 0; j <= i; j++) {
-            const paths = stelle[j].querySelectorAll('path')
-            stelle[j].classList.add('stellaIlluminata')
-        }
-        for (let k = i + 1; k < stelle.length; k++) {
-            const paths = stelle[k].querySelectorAll('path')
-            stelle[k].classList.remove('stellaIlluminata')
-        }
-    })
+  stelle[i].addEventListener('mouseover', gestoreMouseover(i));
+  stelle[i].addEventListener('click', gestoreClick(i));
 }
 
-const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
-bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
+let numeroStelleCliccate = 0  
+
+const assegnazioneClickStella = () => {
+  const stelle = document.getElementsByClassName('stella')
+  for (let i = 0; i < stelle.length; i++) {
+    stelle[i].addEventListener('click', () => {
+      numeroStelleCliccate = i + 1
+    })
+  }
+}
+
+const creazioneFeedback = () => {
+  const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
+  bottoneMoreInfo.addEventListener('click', () => {
+    if (numeroStelleCliccate > 0) {
+    bottoneMoreInfo.disabled = true
+    titoloFeedback.style.display = 'block'
+    esitoFeedback.style.display = 'flex'
+    stellePiuFeedback.style.display = 'block'
+    const iconaUser = document.createElement('img')
+    iconaUser.src = 'Assets/IMG/personCircleOutline.svg'
+    esitoFeedback.insertBefore(iconaUser, esitoFeedback.firstChild)
+    for (let i = 0; i < numeroStelleCliccate; i++) {
+    const iconaStelle = document.createElement('img')
+    iconaStelle.src = 'Assets/IMG/star.svg'
+    stellePiuFeedback.insertBefore(iconaStelle, stellePiuFeedback.firstChild)
+    }
+    const commentoFeedback = document.querySelector('#commentoFeedback').value
+    const feedbackP = document.querySelector('#feedbackP')
+    feedbackP.innerText = commentoFeedback
+    }
+})
+}
+
+creazioneFeedback()
+
+assegnazioneClickStella()
