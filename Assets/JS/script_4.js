@@ -14,7 +14,7 @@ paginaFeedback.style.display = 'none'
 
 // gestione timer
 
-let secondi = 5
+let secondi = 60
 let timeoutId
 
 let numeriSecondi = document.querySelector('.testoSecondi')
@@ -48,7 +48,7 @@ const countdown = (domande) => {
 const resetCountdown = (domande) => {
 
     clearTimeout(timeoutId)
-    secondi = 5
+    secondi = 60
     countdown(domande)
 }
 

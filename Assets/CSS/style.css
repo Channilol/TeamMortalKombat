@@ -512,7 +512,7 @@ header img {
 .animationTimer {
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
-  animation: fillDonut 5s linear forwards;
+  animation: fillDonut 60s linear forwards;
   transform-origin: 50% 50%; /* Imposta il punto di origine della trasformazione */
   transform: rotate(-90deg);
 }
