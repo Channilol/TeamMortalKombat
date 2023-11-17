@@ -9,13 +9,6 @@ html {
     font-weight: 300;
 }
 
-/* body {
-    background-image: url(../IMG/bg.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-} */
-
 .backgroundContainer {
     position: fixed;
     top: 0;
@@ -27,7 +20,7 @@ html {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    z-index: -1; /* Posizionato dietro il contenuto principale */
+    z-index: -1;
   }
 
 h1, h2, h3, h4 {

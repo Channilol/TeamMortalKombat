@@ -392,7 +392,6 @@ creaAnswersMedie()
 
 creaAnswersDifficili()
 
-
 divflaggaLaCheckbox.style.display = 'none'
 paginaDifficolta.style.display = 'none'
 paginaDomande.style.display = 'none'
@@ -401,7 +400,6 @@ paginaFeedback.style.display = 'none'
 titoloFeedback.style.display = 'none'
 esitoFeedback.style.display = 'none'
 stellePiuFeedback.style.display = 'none'
-
 
 const indiceDomande = 0
 
@@ -693,22 +691,8 @@ bottoneRateUs.addEventListener('click', () => displayQuattro())
 //Script Pagina 4
 const stelle = document.querySelectorAll('.stella')
 
-/* for (let i = 0; i < stelle.length; i++) {
-  stelle[i].addEventListener('mouseover', () => {
-    for (let j = 0; j <= i; j++) {
-      const paths = stelle[j].querySelectorAll('path')
-      stelle[j].classList.add('stellaIlluminata')
-    }
-    for (let k = i + 1; k < stelle.length; k++) {
-      const paths = stelle[k].querySelectorAll('path')
-      stelle[k].classList.remove('stellaIlluminata')
-    }
-  })
-} */
-
 let mouseoverAbilitato = true;
 
-// Funzione per gestire l'evento mouseover
 const gestoreMouseover = (indice) => () => {
   if (mouseoverAbilitato) {
     for (let j = 0; j <= indice; j++) {
@@ -722,7 +706,6 @@ const gestoreMouseover = (indice) => () => {
   }
 };
 
-// Funzione per gestire l'evento click
 const gestoreClick = (indice) => () => {
   for (let j = 0; j <= indice; j++) {
     const paths = stelle[j].querySelectorAll('path');

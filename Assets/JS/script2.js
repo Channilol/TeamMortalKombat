@@ -1,30 +1,351 @@
+/*  VERSIONE CON FETCH  */
 
-let difficulty = 'hard'
+// stato iniziale
 
-async function getQuestions(difficulty) {
-    const response = await fetch(`https://opentdb.com/api.php?amount=10&category=18&difficulty=${difficulty}`)
-    const domande = await response.json();
-    return domande
-}
+const paginaWelcome = document.querySelector('#paginaWelcome')
+const paginaDifficolta = document.querySelector('#paginaDifficolta')
+const paginaDomande = document.querySelector('#paginaDomande')
+const paginaRisultati = document.querySelector('#paginaRisultati')
+const paginaFeedback = document.querySelector('#paginaFeedback')
 
-const domande = getQuestions(difficulty)
 
-const nuoveDomande = []
+paginaDifficolta.style.display = 'none'
+paginaDomande.style.display = 'none'
+paginaRisultati.style.display = 'none'
+paginaFeedback.style.display = 'none'
 
-const creaAnswers = async () => {
-    const newAnswer = []
-    for (let i = 0; i < domande.results.length; i++) {
-        const correctAnswer = domande.results[i].correct_answer
-        newAnswer.push(correctAnswer)
-        const incorrectAnswer = domande.results[i].incorrect_answer
-        for (let j = 0; j < incorrectAnswer.length; j++) {
-            const answerSingola = incorrectAnswer[j]
-            newAnswer.push(answerSingola)
+// gestione timer
+
+let secondi = 5
+let timeoutId
+
+let numeriSecondi = document.querySelector('.testoSecondi')
+let donutTimer = document.querySelector('.animationTimer');
+
+const countdown = (domande) => {
+    if (secondi > 0) {
+        numeriSecondi.innerHTML = secondi;
+        secondi--;
+        timeoutId = setTimeout(() => countdown(domande), 1000);
+    } else {
+        console.log('Tempo scaduto');
+        if (indiceDomandaCorrente < domande.length) {
+            indiceDomandaCorrente++;
+            if (indiceDomandaCorrente < domande.length) {
+                resetCountdown(domande);
+                divRisposte.innerHTML = '';
+                creazioneDomanda(domande);
+            } else {
+                console.log('Domande finite');
+                calcoloRisultati();
+                paginaDomande.style.display = 'none';
+                paginaRisultati.style.display = 'block';
+            }
         }
     }
-    nuoveDomande.push(newAnswer)
+};
+
+const resetCountdown = (domande) => {
+
+    clearTimeout(timeoutId)
+    secondi = 5
+    countdown(domande)
 }
 
-creaAnswers()
+const resetTimerSVG = () => {
+    // Rimuovi e riaggiungi l'elemento SVG per far ripartire l'animazione
+    const parent = donutTimer.parentNode;
+    const nextDonutTimer = donutTimer.cloneNode(true);
+    parent.replaceChild(nextDonutTimer, donutTimer);
+    donutTimer = nextDonutTimer;
+}
 
-console.log(nuoveDomande)
+///////
+let domande = ['hello'] // variabile globale
+
+let difficulty
+
+const getQuestions = async (difficulty, amount) => {
+
+    try {
+        const response = await fetch(`https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty}`);
+        const data = await response.json();
+        domande = data.results
+        return domande
+
+    } catch (err) {
+        console.log(err)
+    }
+};
+
+// gestione difficoltà
+
+const impostaDifficulty = (level) => {
+    difficulty = level
+    displayTre()
+    return difficulty
+}
+
+const sceltaButtonDifficulty = () => {
+    const bottoneFacile = document.querySelector('#bottoneFacile');
+    const bottoneMedia = document.querySelector('#bottoneMedia');
+    const bottoneDifficile = document.querySelector('#bottoneDifficile');
+
+    bottoneFacile.addEventListener('click', () => {
+        impostaDifficulty('easy')
+    })
+
+    bottoneMedia.addEventListener('click', () => {
+        impostaDifficulty('medium')
+    })
+
+    bottoneDifficile.addEventListener('click', () => {
+        impostaDifficulty('hard')
+    })
+}
+
+sceltaButtonDifficulty()
+
+let punteggioTotale = 0
+let indiceDomandaCorrente = 0
+
+const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
+
+const creazioneDomanda = (domandePrese) => {
+
+    resetCountdown(domandePrese)
+    resetTimerSVG()
+
+    console.log(domandePrese)
+
+    const h1 = document.querySelector('#titoloDomandaHtml')
+    const numeroDomandaCorrente = document.querySelector('#numeroDomandaCorrente')
+    numeroDomandaCorrente.innerText = indiceDomandaCorrente + 1
+
+    h1.innerText = domandePrese[indiceDomandaCorrente].question
+    const risposte = []
+
+    if (domandePrese[indiceDomandaCorrente].type === 'multiple') {
+
+        const rispostaCorretta = domandePrese[indiceDomandaCorrente].correct_answer
+        risposte.push(rispostaCorretta)
+
+        for (let j = 0; j < domandePrese[indiceDomandaCorrente].incorrect_answers.length; j++) {
+            risposte.push(domandePrese[indiceDomandaCorrente].incorrect_answers[j])
+        }
+
+        const newRisposteMultiple = mischiaArrayRisposte(risposte)
+
+        for (let i = 0; i < newRisposteMultiple.length; i++) {
+            const risposta = document.createElement('button')
+            const testoRisposta = newRisposteMultiple[i]
+            risposta.textContent = testoRisposta
+
+            divRisposte.appendChild(risposta)
+            risposta.addEventListener('click', () => { clickRisposta(testoRisposta, domandePrese) })
+        }
+
+    } else {
+        const rispostaCorretta = domandePrese[indiceDomandaCorrente].correct_answer
+        risposte.push(rispostaCorretta)
+
+        for (let j = 0; j < domandePrese[indiceDomandaCorrente].incorrect_answers.length; j++) {
+            risposte.push(domandePrese[indiceDomandaCorrente].incorrect_answers[j])
+        }
+
+        const newRisposteBool = mischiaArrayRisposte(risposte)
+
+        for (let i = 0; i < newRisposteBool.length; i++) {
+            const risposta = document.createElement('button')
+            const testoRisposta = newRisposteBool[i]
+            risposta.textContent = testoRisposta
+
+            divRisposte.appendChild(risposta)
+            risposta.addEventListener('click', () => { clickRisposta(testoRisposta, domandePrese) })
+        }
+
+    }
+
+    let totaleDomandeScelte = document.querySelector('#totaleDomandeScelte')
+    totaleDomandeScelte.innerText = `/${numeroDomande}`
+
+    console.log(risposte)
+
+}
+
+// generazione risposte in maniera random
+
+const mischiaArrayRisposte = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+}
+
+// click risposta + domanda successiva
+
+const clickRisposta = (risposta, domande) => {
+    if (indiceDomandaCorrente < domande.length - 1) {
+        if (risposta === domande[indiceDomandaCorrente].correct_answer) {
+            console.log('Risposta corretta');
+            indiceDomandaCorrente++;
+            punteggioTotale++;
+        } else {
+            console.log('Risposta errata');
+            indiceDomandaCorrente++;
+        }
+
+        divRisposte.innerHTML = '';
+        creazioneDomanda(domande);
+    } else {
+        if (risposta === domande[indiceDomandaCorrente].correct_answer) {
+            console.log('Risposta corretta');
+            punteggioTotale++;
+        } else {
+            console.log('Risposta errata');
+        }
+
+        console.log('Domande finite');
+        calcoloRisultati();
+        paginaDomande.style.display = 'none';
+        paginaRisultati.style.display = 'block';
+    }
+};
+
+// vai a pagina due (scelta difficolta)
+
+document.addEventListener('DOMContentLoaded', () => {
+    const bottoneProceed = document.querySelector('#bottoneProceed')
+    const checkBoxObbligatoria = document.querySelector('#checkBoxObbligatoria')
+
+    checkBoxObbligatoria.addEventListener('change', () => {
+        bottoneProceed.disabled = !checkBoxObbligatoria.checked
+    })
+
+    bottoneProceed.addEventListener('click', (event) => {
+        if (checkBoxObbligatoria.checked) {
+            displayDue()
+            event.preventDefault();
+        }
+        else {
+            alert('Before proceeding to the test check all boxes')
+        }
+    })
+
+})
+
+const displayDue = (e) => {
+    paginaWelcome.style.display = 'none';
+    paginaDifficolta.style.display = 'block';
+}
+
+// vai a pagina tre (pagina domande)
+
+let numeroDomande = 1
+
+// gestione numero domande scelte
+
+const numeroDomandeScelto = () => {
+    const inputNumero = document.querySelector('#numeroDomandeScelte')
+    inputNumero.addEventListener('input', () => {
+        numeroDomande = parseInt(inputNumero.value, 10)
+    })
+
+}
+
+numeroDomandeScelto()
+
+const displayTre = (e) => {
+    paginaDifficolta.style.display = 'none';
+    paginaDomande.style.display = 'block';
+
+    getQuestions(difficulty, numeroDomande).then((domandeFetchate) => {
+        creazioneDomanda(domandeFetchate)
+    }).catch(() => {
+        console.log('Errore fetch domande')
+    })
+}
+
+// calcolo risultati
+
+const calcoloRisultati = () => {
+    //prendiamo gli elementi html
+    let percentualeRisposteCorrette = document.querySelector('#percentualeCorrette')
+    let percentualeRisposteSbagliate = document.querySelector('#percentualeSbagliate')
+    let numeroRisposteCorrette = document.querySelector('#numeroRisposteCorrette')
+    let numeroRisposteSbagliate = document.querySelector('#numeroRisposteSbagliate')
+
+    //calcoli percentuali e interi
+    let risposteSbagliate = domande.length - punteggioTotale
+    let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length  // x : 400 = numeroPercentualeRisposteCorrette : 100
+    let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
+
+    //assegnazione calcoli agli elementi html
+    percentualeRisposteCorrette.innerText = (numeroPercentualeRisposteCorrette).toFixed(1) + '%'
+    percentualeRisposteSbagliate.innerText = (numeroPercentualeRisposteSbagliate).toFixed(1) + '%'
+    numeroRisposteCorrette.innerText = punteggioTotale + `/${numeroDomande} questions`
+    numeroRisposteSbagliate.innerText = risposteSbagliate + `/${numeroDomande} questions`
+
+    aggiornaGrafico()
+    aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
+}
+
+// valori grafico
+
+const aggiornaGrafico = () => {
+    const circles = document.querySelector('.donut-segment')
+    const circonferenzaGrafico = 400
+    let numeroPercentualeRisposteCorrette = (punteggioTotale * 100) / domande.length
+    let graficoCorrette = (numeroPercentualeRisposteCorrette * circonferenzaGrafico) / 100
+    let graficoSbagliate = circonferenzaGrafico - graficoCorrette
+    circles.style.strokeDasharray = `${graficoSbagliate} ${graficoCorrette}`
+}
+
+
+const aggiornaTestoGraficoRisultati = (percentuale) => {
+    const titolo = document.querySelector('.donutGraficoP1')
+    const titoloColorato = document.querySelector('.donutGraficoP2')
+    const p1 = document.querySelector('.donutGraficoP3')
+    const p2 = document.querySelector('.donutGraficoP4')
+
+    if (percentuale < 60) {
+        titolo.innerHTML = "I'm sorry!"
+        titoloColorato.style.fill = '#c2128d'
+        titoloColorato.innerHTML = "You failed the exam"
+        p1.innerHTML = 'You have not'
+        p2.innerHTML = 'passed the exam'
+    }
+}
+
+// display pagina feedback
+
+const bottoneRateUs = document.querySelector('#bottoneRateUs')
+
+const displayQuattro = () => {
+    paginaRisultati.style.display = 'none';
+    paginaFeedback.style.display = 'block';
+}
+
+bottoneRateUs.addEventListener('click', () => displayQuattro())
+
+// script pagina 4
+
+const stelle = document.querySelectorAll('.stella')
+
+for (let i = 0; i < stelle.length; i++) {
+    stelle[i].addEventListener('mouseover', () => {
+        for (let j = 0; j <= i; j++) {
+            const paths = stelle[j].querySelectorAll('path')
+            stelle[j].classList.add('stellaIlluminata')
+        }
+        for (let k = i + 1; k < stelle.length; k++) {
+            const paths = stelle[k].querySelectorAll('path')
+            stelle[k].classList.remove('stellaIlluminata')
+        }
+    })
+}
+
+const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
+bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
