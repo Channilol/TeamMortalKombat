@@ -522,7 +522,7 @@ let numeroDomande = 1
 const numeroDomandeScelto = () => {
   const inputNumero = document.querySelector('#numeroDomandeScelte')
   inputNumero.addEventListener('input', () => {
-    numeroDomande = parseInt(inputNumero.value, 16)
+    numeroDomande = parseInt(inputNumero.value, 10)
   })
 }
 
@@ -580,6 +580,8 @@ const creazioneDomanda = () => {
       risposta.addEventListener('click', () => clickRisposta(testoRisposta))
     }
   }
+  let totaleDomandeScelte = document.querySelector('#totaleDomandeScelte')
+  totaleDomandeScelte.innerText = `/${numeroDomande}`
 }
 
 /* 
@@ -600,6 +602,7 @@ const displayTre = (e) => {
   paginaDomande.style.display = 'block';
   creazioneDomanda()
 }
+
 
 //Click risposta + domanda successiva
 
@@ -649,10 +652,10 @@ const calcoliRisultati = () => {
   let numeroPercentualeRisposteSbagliate = 100 - numeroPercentualeRisposteCorrette
 
   //assegnazione calcoli agli elementi html
-  percentualeRisposteCorrette.innerText = numeroPercentualeRisposteCorrette + '%'
-  percentualeRisposteSbagliate.innerText = numeroPercentualeRisposteSbagliate + '%'
-  numeroRisposteCorrette.innerText = punteggioTotale + '/10 questions'
-  numeroRisposteSbagliate.innerText = risposteSbagliate + '/10 questions'
+  percentualeRisposteCorrette.innerText = (numeroPercentualeRisposteCorrette).toFixed(1) + '%'
+  percentualeRisposteSbagliate.innerText = (numeroPercentualeRisposteSbagliate).toFixed(1) + '%'
+  numeroRisposteCorrette.innerText = punteggioTotale + `/${numeroDomande} questions`
+  numeroRisposteSbagliate.innerText = risposteSbagliate + `/${numeroDomande} questions`
   aggiornaGrafico()
   aggiornaTestoGraficoRisultati(numeroPercentualeRisposteCorrette)
 }
