@@ -766,6 +766,15 @@ const creazioneFeedback = () => {
 })
 }
 
+const inputFeedback = document.querySelector('#commentoFeedback')
+
+inputFeedback.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+    }
+  }
+)
+
 creazioneFeedback()
 
 assegnazioneClickStella()
