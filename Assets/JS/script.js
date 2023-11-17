@@ -1,8 +1,12 @@
 const paginaWelcome = document.querySelector('#paginaWelcome')
+const divflaggaLaCheckbox = document.querySelector('#divflaggaLaCheckbox')
 const paginaDifficolta = document.querySelector('#paginaDifficolta')
 const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
 const paginaFeedback = document.querySelector('#paginaFeedback')
+const titoloFeedback = document.querySelector('#titoloFeedback')
+const esitoFeedback = document.querySelector('#esitoFeedback')
+const stellePiuFeedback = document.querySelector('#stellePiuFeedback')
 
 //DOMANDE EASY
 
@@ -388,13 +392,15 @@ creaAnswersMedie()
 
 creaAnswersDifficili()
 
-console.log(domandeDifficili)
 
-
+divflaggaLaCheckbox.style.display = 'none'
 paginaDifficolta.style.display = 'none'
 paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'none'
 paginaFeedback.style.display = 'none'
+titoloFeedback.style.display = 'none'
+esitoFeedback.style.display = 'none'
+stellePiuFeedback.style.display = 'none'
 
 
 const indiceDomande = 0
@@ -446,9 +452,16 @@ const resetTimerSVG = () => {
 document.addEventListener('DOMContentLoaded', () => {
   const bottoneProceed = document.querySelector('#bottoneProceed')
   const checkBoxObbligatoria = document.querySelector('#checkBoxObbligatoria')
+  const flaggaLaCheckbox = document.querySelector('#flaggaLaCheckbox')
 
   checkBoxObbligatoria.addEventListener('change', () => {
     bottoneProceed.disabled = !checkBoxObbligatoria.checked
+    if (!checkBoxObbligatoria.checked) {
+      divflaggaLaCheckbox.style.display = 'block'
+      flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the exam!'
+    } else {
+      divflaggaLaCheckbox.style.display = 'none'
+    }
   })
 
   bottoneProceed.addEventListener('click', (event) => {
@@ -457,7 +470,8 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
     }
     else {
-      alert('Before proceeding to the test check all boxes')
+      divflaggaLaCheckbox.style.display = 'block'
+      flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the exam!'
     }
   })
 
@@ -546,8 +560,6 @@ const creazioneDomanda = () => {
     domande = domandeDifficili
   }
 
-  console.log(numeroDomande)
-
   domande.length = numeroDomande
 
   const h1 = document.querySelector('#titoloDomandaHtml')
@@ -625,11 +637,14 @@ const clickRisposta = (risposta) => {
     } else {
 
     }
+    clearTimeout(timeoutId)
     calcoliRisultati()
     paginaDomande.style.display = 'none'
     paginaRisultati.style.display = 'block'
   }
 }
+
+
 
 /* const scadereTempo = () => {
   if (secondi === 0) {
@@ -703,6 +718,7 @@ donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorr
 const bottoneRateUs = document.querySelector('#bottoneRateUs')
 
 const displayQuattro = () => {
+  clearTimeout(timeoutId)
   paginaRisultati.style.display = 'none';
   paginaFeedback.style.display = 'block';
 }
@@ -753,6 +769,8 @@ const stelle = document.querySelectorAll('.stella')
         }
     }) */
 
+let numeroStelleCliccate = 0    
+
 for (let i = 0; i < stelle.length; i++) {
   stelle[i].addEventListener('mouseover', () => {
     for (let j = 0; j <= i; j++) {
@@ -766,8 +784,42 @@ for (let i = 0; i < stelle.length; i++) {
   })
 }
 
-const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
-bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
+const assegnazioneClickStella = () => {
+  const stelle = document.getElementsByClassName('stella')
+  for (let i = 0; i < stelle.length; i++) {
+    stelle[i].addEventListener('click', () => {
+      numeroStelleCliccate = i + 1
+      console.log(numeroStelleCliccate)
+    })
+  }
+}
+
+const creazioneFeedback = () => {
+  const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
+  bottoneMoreInfo.addEventListener('click', () => {
+    bottoneMoreInfo.disabled = true
+    titoloFeedback.style.display = 'block'
+    esitoFeedback.style.display = 'flex'
+    stellePiuFeedback.style.display = 'block'
+    const iconaUser = document.createElement('img')
+    iconaUser.src = 'Assets/IMG/personCircleOutline.svg'
+    esitoFeedback.insertBefore(iconaUser, esitoFeedback.firstChild)
+    for (let i = 0; i < numeroStelleCliccate; i++) {
+    const iconaStelle = document.createElement('img')
+    iconaStelle.src = 'Assets/IMG/star.svg'
+    stellePiuFeedback.insertBefore(iconaStelle, stellePiuFeedback.firstChild)
+    }
+    const commentoFeedback = document.querySelector('#commentoFeedback').value
+    const feedbackP = document.querySelector('#feedbackP')
+    feedbackP.innerText = commentoFeedback
+  })
+}
+
+creazioneFeedback()
+
+assegnazioneClickStella()
+
+/* <img src="Assets/IMG/person-circle-outline (1).svg" alt="IconaUser"> */
 
 /* do {
     numeroGenerato = Math.floor(Math.random() * 76) + 1;
