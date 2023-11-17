@@ -7,6 +7,7 @@ const paginaFeedback = document.querySelector('#paginaFeedback')
 const titoloFeedback = document.querySelector('#titoloFeedback')
 const esitoFeedback = document.querySelector('#esitoFeedback')
 const stellePiuFeedback = document.querySelector('#stellePiuFeedback')
+const divRiempiInput = document.querySelector('#divRiempiInput')
 
 //DOMANDE EASY
 
@@ -400,6 +401,7 @@ paginaFeedback.style.display = 'none'
 titoloFeedback.style.display = 'none'
 esitoFeedback.style.display = 'none'
 stellePiuFeedback.style.display = 'none'
+divRiempiInput.style.display = 'none'
 
 const indiceDomande = 0
 
@@ -746,7 +748,11 @@ const assegnazioneClickStella = () => {
 const creazioneFeedback = () => {
   const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
   bottoneMoreInfo.addEventListener('click', () => {
-    if (numeroStelleCliccate > 0) {
+    if (numeroStelleCliccate === 0) {
+      divRiempiInput.style.display = 'block'
+    }
+    else if (numeroStelleCliccate > 0) {
+    divRiempiInput.style.display = 'none'
     bottoneMoreInfo.disabled = true
     titoloFeedback.style.display = 'block'
     esitoFeedback.style.display = 'flex'
