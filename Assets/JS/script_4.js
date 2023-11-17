@@ -1,34 +1,39 @@
+// stato iniziale
 
 const paginaWelcome = document.querySelector('#paginaWelcome')
+const paginaDifficolta = document.querySelector('#paginaDifficolta')
 const paginaDomande = document.querySelector('#paginaDomande')
 const paginaRisultati = document.querySelector('#paginaRisultati')
 const paginaFeedback = document.querySelector('#paginaFeedback')
 
-// stato iniziale
 
+paginaDifficolta.style.display = 'none'
 paginaDomande.style.display = 'none'
 paginaRisultati.style.display = 'none'
 paginaFeedback.style.display = 'none'
 
-
-
 ///////
 let domande; // variabile globale
 
-const difficulty = 'hard';
+let difficulty
 
 const getQuestions = async (difficulty) => {
-    const response = await fetch(`https://opentdb.com/api.php?amount=10&category=18&difficulty=${difficulty}`);
+    const facile = impostaDifficulty()
+    const response = await fetch(`https://opentdb.com/api.php?amount=10&category=18&difficulty=${facile}`);
     const data = await response.json();
     domande = data.results
     return domande
 };
+
+
 
 const fetchQuestions = async () => { // Aspetta prima getQuestions prima di esguire fetchQuestions
     await getQuestions(difficulty);
 };
 
 // Esegui fetchQuestions
+
+
 fetchQuestions()
     .then(() => {
         // se funzione ok esegui console.log
@@ -39,13 +44,48 @@ fetchQuestions()
     })
     .catch((error) => {
         // se errore esegui qui sotto
-        console.error('Errore di fetch', error);
+        console.log('Errore di fetch', error.message);
     });
 
 
-const creazioneDomanda = (domande) => {
+// gestione difficoltà
 
-    console.log(domande.length)
+const impostaDifficultyEasy = async = () => {
+    const bottoneFacile = document.querySelector('#bottoneFacile')
+    bottoneFacile.addEventListener('click', () => {
+        difficulty = 'easy'
+        displayTre()
+        return difficulty
+    })
+}
+
+const impostaDifficultyMedium = async () => {
+    const bottoneMedia = document.querySelector('#bottoneMedia')
+    bottoneMedia.addEventListener('click', () => {
+        difficulty = 'medium'
+        return difficulty
+    })
+}
+
+const impostaDifficultyHard = async () => {
+    const bottoneDifficile = document.querySelector('#bottoneDifficile')
+    bottoneDifficile.addEventListener('click', () => {
+        difficulty = 'hard'
+        return difficulty
+    })
+}
+
+
+difficoltaFacile()
+difficoltaMedia()
+difficoltaDifficile()
+
+const creazioneDomanda = (domandePrese) => {
+
+    for (let i = 0; i < domandePrese.length; i++) {
+        console.log(domandePrese[i]);
+    }
 
 }
+
 

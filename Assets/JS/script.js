@@ -517,12 +517,12 @@ const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
 
 // numero di domande
 
-let numeroDomande
+let numeroDomande = 1
 
 const numeroDomandeScelto = () => {
   const inputNumero = document.querySelector('#numeroDomandeScelte')
   inputNumero.addEventListener('input', () => {
-    numeroDomande = parseInt(inputNumero.value, 10)
+    numeroDomande = parseInt(inputNumero.value, 16)
   })
 }
 
@@ -764,3 +764,6 @@ bottoneMoreInfo.addEventListener('click', (e) => e.preventDefault())
 /* do {
     numeroGenerato = Math.floor(Math.random() * 76) + 1;
 } while (arrayNumeriEstratti.includes(numeroGenerato)); */
+
+
+
