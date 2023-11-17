@@ -506,8 +506,6 @@ difficoltaFacile()
 difficoltaMedia()
 difficoltaDifficile()
 
-
-
 // Script pagina 2
 
 // Funzione generazione numeri random 0-3
@@ -525,9 +523,6 @@ const rispostaRandomica = () => {
 }
 
 const divRisposte = document.querySelector('#divContenitoreBottoniDomande')
-
-//
-
 
 // numero di domande
 
@@ -601,14 +596,6 @@ const creazioneDomanda = () => {
   totaleDomandeScelte.innerText = `/${numeroDomande}`
 }
 
-/* 
-arrayNumeriEstratti = []
-do {
-    numeroGenerato = Math.floor(Math.random() * 4);
-} while (arrayNumeriEstratti.includes(numeroGenerato)); */
-
-
-
 const displayDue = (e) => {
   paginaWelcome.style.display = 'none';
   paginaDifficolta.style.display = 'block';
@@ -619,7 +606,6 @@ const displayTre = (e) => {
   paginaDomande.style.display = 'block';
   creazioneDomanda()
 }
-
 
 //Click risposta + domanda successiva
 
@@ -643,19 +629,6 @@ const clickRisposta = (risposta) => {
     paginaRisultati.style.display = 'block'
   }
 }
-
-
-
-/* const scadereTempo = () => {
-  if (secondi === 0) {
-    indiceDomandaCorrente++
-    creazioneDomanda()
-  } else {
-
-  }
-} */
-
-//creazioneDomanda()
 
 //Script Pagina 3
 
@@ -706,14 +679,6 @@ const aggiornaTestoGraficoRisultati = (percentuale) => {
   }
 }
 
-/* console.log(graficoCorrette)
-console.log(graficoSbagliate)
-
-const donutSegment = document.querySelector('.donut-segment')
-
-donutSegment.setAttribute('stroke-dasharray', `${graficoSbagliate} ${graficoCorrette}`);
- */
-
 //Display pagina feedback
 const bottoneRateUs = document.querySelector('#bottoneRateUs')
 
@@ -728,50 +693,7 @@ bottoneRateUs.addEventListener('click', () => displayQuattro())
 //Script Pagina 4
 const stelle = document.querySelectorAll('.stella')
 
-/* stelle.forEach((stella, index) => { //ogni stella dell'array stelle    // TENTATIVO N1
-    stella.addEventListener('mouseover', () => { //assegno ad ogni elemento un eventListener mouseover
-        for (let i = 0; i <= index; i++) { // 
-            const paths = stelle[i].querySelectorAll('path') //paths --> array di oggetti pari
-            paths.forEach((path) => {
-                path.setAttribute('fill', '#00ffff')
-            })
-        }
-    })
-})  */
-
-/* for (let i = 0; i < stelle.length; i++) {            TENTATIVO N2
-    stelle[i].addEventListener('mouseover', () => {
-        for (let j = 0; j <= i; j++) {
-            const paths = stelle[j].querySelectorAll('path')
-            stelle[j].classList.add('stellaIlluminata')
-             for (let k = 0; k < paths.length; k++) {   
-                paths[k].setAttribute('fill', '')
-            }
-        }
-
-        for (let k = i + 1; k < stelle.length; k++) {
-            const paths = stelle[k].querySelectorAll('path')
-            stelle[k].classList.remove('stellaIlluminata')
-            for (let z = 0; z < paths.length; z++) {    
-                paths[z].setAttribute('fill', '')
-            } 
-        }
-    })
-} */
-
-/*     stelle[i].addEventListener('mouseout', () => {    // TENTATIVO N3
-        for (let j = 0; j <= stelle.length; j++) {
-            const paths = stelle[j].querySelectorAll('path')
-            stelle[j].classList.remove('stellaIlluminata')
-            for (let k = 0; k < paths.length; k++) {
-                paths[k].setAttribute('fill', '')
-            }
-        }
-    }) */
-
-let numeroStelleCliccate = 0    
-
-for (let i = 0; i < stelle.length; i++) {
+/* for (let i = 0; i < stelle.length; i++) {
   stelle[i].addEventListener('mouseover', () => {
     for (let j = 0; j <= i; j++) {
       const paths = stelle[j].querySelectorAll('path')
@@ -782,14 +704,58 @@ for (let i = 0; i < stelle.length; i++) {
       stelle[k].classList.remove('stellaIlluminata')
     }
   })
+} */
+
+let mouseoverAbilitato = true;
+
+// Funzione per gestire l'evento mouseover
+const gestoreMouseover = (indice) => () => {
+  if (mouseoverAbilitato) {
+    for (let j = 0; j <= indice; j++) {
+      const paths = stelle[j].querySelectorAll('path');
+      stelle[j].classList.add('stellaIlluminata');
+    }
+    for (let k = indice + 1; k < stelle.length; k++) {
+      const paths = stelle[k].querySelectorAll('path');
+      stelle[k].classList.remove('stellaIlluminata');
+    }
+  }
+};
+
+// Funzione per gestire l'evento click
+const gestoreClick = (indice) => () => {
+  for (let j = 0; j <= indice; j++) {
+    const paths = stelle[j].querySelectorAll('path');
+    stelle[j].classList.add('stellaIlluminata');
+  }
+
+  // Rimuovi la classe 'stellaIlluminata' dalle stelle successive
+  for (let k = indice + 1; k < stelle.length; k++) {
+    stelle[k].classList.remove('stellaIlluminata');
+  }
+
+  // Disabilita il mouseover dopo il click
+  mouseoverAbilitato = false;
+
+  // Rimuovi gli eventi mouseover dopo il click
+  for (let i = 0; i < stelle.length; i++) {
+    stelle[i].removeEventListener('mouseover', gestoreMouseover(i));
+  }
+};
+
+// Aggiungi gli eventi mouseover e click alle stelle
+for (let i = 0; i < stelle.length; i++) {
+  stelle[i].addEventListener('mouseover', gestoreMouseover(i));
+  stelle[i].addEventListener('click', gestoreClick(i));
 }
+
+let numeroStelleCliccate = 0  
 
 const assegnazioneClickStella = () => {
   const stelle = document.getElementsByClassName('stella')
   for (let i = 0; i < stelle.length; i++) {
     stelle[i].addEventListener('click', () => {
       numeroStelleCliccate = i + 1
-      console.log(numeroStelleCliccate)
     })
   }
 }
@@ -797,6 +763,7 @@ const assegnazioneClickStella = () => {
 const creazioneFeedback = () => {
   const bottoneMoreInfo = document.querySelector('#bottoneMoreInfo')
   bottoneMoreInfo.addEventListener('click', () => {
+    if (numeroStelleCliccate > 0) {
     bottoneMoreInfo.disabled = true
     titoloFeedback.style.display = 'block'
     esitoFeedback.style.display = 'flex'
@@ -812,15 +779,10 @@ const creazioneFeedback = () => {
     const commentoFeedback = document.querySelector('#commentoFeedback').value
     const feedbackP = document.querySelector('#feedbackP')
     feedbackP.innerText = commentoFeedback
-  })
+    }
+})
 }
 
 creazioneFeedback()
 
 assegnazioneClickStella()
-
-/* <img src="Assets/IMG/person-circle-outline (1).svg" alt="IconaUser"> */
-
-/* do {
-    numeroGenerato = Math.floor(Math.random() * 76) + 1;
-} while (arrayNumeriEstratti.includes(numeroGenerato)); */
