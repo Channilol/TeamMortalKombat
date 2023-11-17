@@ -458,7 +458,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bottoneProceed.disabled = !checkBoxObbligatoria.checked
     if (!checkBoxObbligatoria.checked) {
       divflaggaLaCheckbox.style.display = 'block'
-      flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the test!'
+      flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the exam!'
+    } else {
+      divflaggaLaCheckbox.style.display = 'none'
     }
   })
 
@@ -469,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else {
       divflaggaLaCheckbox.style.display = 'block'
-      flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the test!'
+      flaggaLaCheckbox.innerText = 'You must flag the checkbox to start the exam!'
     }
   })
 

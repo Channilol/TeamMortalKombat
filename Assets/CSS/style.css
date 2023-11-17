@@ -153,14 +153,17 @@ header img {
 }
 
 #divflaggaLaCheckbox {
-    width: 52%;
+    width: 54%;
+    position: absolute;
+    top: 72.5%;
 }
 
 #flaggaLaCheckbox {
-    padding: 10px 30px;
+    padding: 20px 30px;
     background-color: rgba(255, 255, 255, 0.15);
     font-size: 1.2em;
     font-weight: 600;
+    text-align: center;
 }
 
 #bottoneProceed {
@@ -578,7 +581,9 @@ header img {
 
 #stellePiuFeedback p {
     margin: 0;
+    width: 20vw;
     color: #dcd2e1;
     font-size: 1.2em;
     font-weight: 500;
+    word-wrap: break-word;
 }
